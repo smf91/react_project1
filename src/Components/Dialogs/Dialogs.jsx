@@ -7,14 +7,14 @@ import MessageItem from './MessageItem/MessageItem';
 
 
 
-const Dialogs = () => {
+const Dialogs = (props) => {
     return (
         <div className={cls.dialogs}>
             <div className={cls.dialogBlock}>
-                <DialogItem />
+                <DialogItem  dialogsData = {props.dialogsData}/>
             </div>
             <div className={cls.messageBlock}>
-                <MessageItem />
+                <MessageItem  messageData = {props.messageData}/>
             </div>
         </div>
     )
