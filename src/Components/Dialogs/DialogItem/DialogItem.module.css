@@ -1,0 +1,10 @@
+.dialog a{
+    display: block;
+    color:  #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px ;
+}
+.dialog {
+    padding: 5px;
+}

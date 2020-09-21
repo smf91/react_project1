@@ -1,0 +1,21 @@
+.nav{
+    grid-area: n;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.item a{
+    color: #fff;
+    margin: 10% 0 0 10%;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav .active{
+    color:  gold;
+    font-size: 19px;
+}

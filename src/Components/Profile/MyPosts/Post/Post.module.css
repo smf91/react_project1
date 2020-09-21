@@ -1,0 +1,13 @@
+.post {
+    display: flex;
+    flex-direction: row;
+    background-color: #c0bbbb;
+    margin: 5px 0;
+}
+
+.post img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 10px
+}

@@ -1,0 +1,12 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogBlock {
+    display: flex;
+    flex-direction: column;
+}
+.messageBlock{
+    background-color: gray;
+}
