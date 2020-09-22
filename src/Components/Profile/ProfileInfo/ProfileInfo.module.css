@@ -1,13 +1,16 @@
-.post {
+.profileInfo {
     display: flex;
-    flex-direction: row;
-    background-color: #c0bbbb;
-    margin: 5px 0;
 }
 
-.post img{
-    height: 40px;
-    width: 40px;
+.avatar {
+}
+.avatar img {
+    height: 150px;
     border-radius: 50%;
-    margin: 0 10px
+}
+
+.description {
+    margin: 40px 0 0 40px;
+    color: #fff;
+    font-size: 20px;
 }

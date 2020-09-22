@@ -9,7 +9,7 @@ const Profile = (props) => {
             <div>
                 <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg"></img>
             </div>
-            <ProfileInfo />
+            <ProfileInfo  personData = {props.person}/>
         <MyPosts postsData = {props.state.postsData} />
         </div>
     )
