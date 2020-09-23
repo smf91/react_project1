@@ -8,7 +8,7 @@ let postsElement = props.postsData.map(p=> <Post message = {p.message} id={p.id}
 
     return (
         <div className = {cls.wrapper}>
-            <NewPost />
+            <NewPost createPost = {props.createPost}/>
             {postsElement}
         </div>
     )

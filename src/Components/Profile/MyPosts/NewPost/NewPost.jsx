@@ -1,11 +1,18 @@
 import React from 'react';
-// import cls from './NewPost.module.css';
+import cls from './NewPost.module.scss';
 
-const NewPost = () => {
+const NewPost = (props) => {
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        let text = newPostElement.current.value;
+        props.createPost(text)
+        newPostElement.current.value = ''
+    }
     return (
-        <div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <button>Send</button>
+        <div className={cls.newPostBlock}>
+            <textarea ref={newPostElement}></textarea>
+            <button onClick={addPost} >Send</button>
         </div>
     )
 }

@@ -3,18 +3,16 @@ import cls from './DialogItem.module.scss';
 import { NavLink } from 'react-router-dom';
 
 const DialogItem = (props) => {
-
-let dialogArr = props.person.filter(person => person.myprofile === false)
-
-let dialogElement =
-    dialogArr.map(d => <NavLink to = {`/dialogs/${d.id}`}>
-        <div className= {cls.avatar}> 
-            <img src={d.img} alt=""/>
-        </div>
-        {d.firstName} {d.lastName} </NavLink>)
+    let dialogArr = props.person.filter(person => person.myprofile === false)
+    let dialogElement =
+        dialogArr.map(d => <NavLink to={`/dialogs/${d.id}`}>
+            <div className={cls.avatar}>
+                <img src={d.img} alt="" />
+            </div>
+            {d.firstName} {d.lastName} </NavLink>)
 
     return (
-        <div className = {cls.dialog}>
+        <div className={cls.dialog}>
             {dialogElement}
         </div>
     )

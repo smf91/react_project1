@@ -21,7 +21,8 @@ const App = (props) => {
                                                               person = {props.state.person}/> }/>
           <Route path = '/Music' component={Music} />
           <Route path = '/profile' render = { () => <Profile state = {props.state.profilePage} 
-                                                              person = {props.state.person}/> }/>
+                                                              person = {props.state.person}
+                                                              createPost = {props.createPost} /> }/>
           <Route path = '/News' component={News} />
           <Route path = '/Settings' component={Settings} />
         </div>

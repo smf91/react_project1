@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from './../render'
 
 let state = {
     profilePage : {
@@ -27,8 +28,18 @@ let state = {
         {id : 4, firstName : "Martin", lastName: "Scorsese", city : "New York", birthday: "17.10.1942", img : "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Martin_Scorsese_Berlinale_2010_%28cropped%29.jpg/220px-Martin_Scorsese_Berlinale_2010_%28cropped%29.jpg" , myprofile: false},
         {id : 5, firstName : "Grumpy", lastName: "Cat", city : "Morristown", birthday: "04.04.2013", img : "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Grumpy_Cat_by_Gage_Skidmore.jpg/274px-Grumpy_Cat_by_Gage_Skidmore.jpg" , myprofile: false},
         {id : 6, firstName : "Quentin", lastName: "Tarantino", city : "Morristown", birthday: "27.04.2063", img : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Quentin_Tarantino_by_Gage_Skidmore.jpg/220px-Quentin_Tarantino_by_Gage_Skidmore.jpg" , myprofile: false}
-
     ]
+
 }
+// создание нового поста. В функцию прилетает данные из компоненты MyPosts, создается новый обьект postsData.
+export let CreatePost = (textPost) => {
+    let newPost = {id: 3,
+        message: textPost, 
+        likesCount: 0
+    }
+    state.profilePage.postsData.push(newPost)
+    rerenderEntireTree (state)
+}
+// ==============
 
 export default state;
