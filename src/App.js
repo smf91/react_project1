@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Navigation from './Components/Navigation/Navigation';
 import Header from './Components/Header/Header';
 import Profile from './Components/Profile/Profile';
@@ -17,7 +17,8 @@ const App = (props) => {
         <Header />
         <Navigation />
         <div className="wrapper_content">
-          <Route path = '/dialogs' render = { () => <Dialogs state = {props.state.messagesPage}/> }/>
+          <Route path = '/dialogs' render = { () => <Dialogs state = {props.state.messagesPage} 
+                                                              person = {props.state.person}/> }/>
           <Route path = '/Music' component={Music} />
           <Route path = '/profile' render = { () => <Profile state = {props.state.profilePage} 
                                                               person = {props.state.person}/> }/>

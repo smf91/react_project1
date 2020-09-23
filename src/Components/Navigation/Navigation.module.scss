@@ -3,6 +3,10 @@
     background-color: brown;
     display: flex;
     flex-direction: column;
+    .active{
+        color: gold;
+        font-size: 19px;
+    }
     /* align-items: center; */
 }
 
@@ -15,7 +19,3 @@
     text-decoration: none;
 }
 
-.nav .active{
-    color:  gold;
-    font-size: 19px;
-}
