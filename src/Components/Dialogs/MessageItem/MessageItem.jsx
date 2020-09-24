@@ -13,8 +13,6 @@ const MessageItem = (props) => {
     }
 
 
-
-
     let messageElement =
         props.messageData.map(el => <div className={cls.message}>{el.text}</div>)
     return (

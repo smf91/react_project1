@@ -12,10 +12,10 @@ const Profile = (props) => {
             </div>
             <ProfileInfo myData={myProfile} />
             <MyPosts postsData={props.state.postsData}
-                createPost={props.createPost}
-                newPostText={props.state.newPostText}
-                updateTexareaNewPost={props.updateTexareaNewPost}
-                myData={myProfile}/>
+                    newPostText={props.state.newPostText}
+                    dispatch = {props.dispatch}
+                    myData={myProfile}
+            />
         </div>
     )
 }

@@ -1,9 +1,24 @@
 import * as serviceWorker from './serviceWorker';
-import state from './redux/state'
-import {rerenderEntireTree} from './render'
+import store from './redux/state'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+
+let rerenderEntireTree = (store) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App store={store}/>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
 
 // вызываем функцию которая перерисовывает все дерево
-rerenderEntireTree(state)
+rerenderEntireTree(store)
+
+store.subscribe(rerenderEntireTree);
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

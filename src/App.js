@@ -10,23 +10,20 @@ import Settings from './Components/Settings/Settings';
 import {BrowserRouter, Route} from "react-router-dom";
 
 const App = (props) => {
-  
   return (
     <BrowserRouter>
       <div className="wrapper">
         <Header />
         <Navigation />
         <div className="wrapper_content">
-          <Route path = '/dialogs' render = { () => <Dialogs state = {props.state.messagesPage} 
-                                                              person = {props.state.person}
-                                                              createMessage = {props.createMessage}
-                                                              updateTexareaNewMessage ={props.updateTexareaNewMessage} 
-                                                              /> } />
+          {/* <Route path = '/dialogs' render = { () => <Dialogs state = {props.store.getState().messagesPage} 
+                                                              person = {props.store.getState().person}
+                                                              dispatch= {props.store.dispatch.bind(props.store)}
+                                                              /> } /> */}
           <Route path = '/Music' component={Music} />
-          <Route path = '/profile' render = { () => <Profile state = {props.state.profilePage} 
-                                                              person = {props.state.person}
-                                                              createPost = {props.createPost}
-                                                              updateTexareaNewPost ={props.updateTexareaNewPost}
+          <Route path = '/profile' render = { () => <Profile state = {props.store.getState().profilePage} 
+                                                              person = {props.store.getState().person}
+                                                              dispatch = {props.store.dispatch.bind(props.store)}
                                                               /> }/>
           <Route path = '/News' component={News} />
           <Route path = '/Settings' component={Settings} />
