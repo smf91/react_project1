@@ -1,5 +1,6 @@
-import { rerenderEntireTree } from './../render'
-
+let rerenderEntireTree = ()=>{
+    console.log('state changed');
+}
 let state = {
     profilePage: {
         // массив постов
@@ -41,13 +42,13 @@ let state = {
 }
 
 // в Ф прилетает значение с поля ввода это значение записывается в строку нового поста после чего оно отрисовыввается в поле ввода
-export let updateTexareaNewPost = (changeText) => {
+export const updateTexareaNewPost = (changeText) => {
     state.profilePage.newPostText = changeText;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 // ==================
 // создание нового поста. В функцию прилетает строка с текстом 
-export let CreatePost = (text = state.profilePage.newPostText) => {
+export const CreatePost = (text = state.profilePage.newPostText) => {
     // создается обьект новый постпост
     let newPost = {
         id: 3,
@@ -58,17 +59,17 @@ export let CreatePost = (text = state.profilePage.newPostText) => {
     state.profilePage.postsData.push(newPost)
     // строка с текстом очищается
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 // ==================
 // Аналогична Ф с постами только работает с сообщениями
-export let updateTexareaNewMessage = (changeText) => {
+export const updateTexareaNewMessage = (changeText) => {
     state.messagesPage.newMessageText = changeText;
     rerenderEntireTree(state)
 }
 // ============
 // Аналогична Ф с постами только работает с сообщениями
-export let createMessage = (text = state.messagesPage.newMessageText) => {
+export const createMessage = (text = state.messagesPage.newMessageText) => {
     // создается обьект новое сообщение
     let newMsg = {text: text}
     // message добавляется в  массив с постами
@@ -76,5 +77,11 @@ export let createMessage = (text = state.messagesPage.newMessageText) => {
     // строка с текстом очищается
     state.messagesPage.newMessageText = ''
     rerenderEntireTree(state)
+}
+// =========
+// создаем Ф и импортируем ее в index.js где мы ее вызываем передавая в параметре функию рендер
+// далее в state.js  функции rerenderEntireTree(какая то пустая функция) присваевается значение observer (т.е. функция рендер)
+export const subscribe = (observer) =>{
+    rerenderEntireTree = observer
 }
 export default state;
