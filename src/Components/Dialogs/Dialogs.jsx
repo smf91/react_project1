@@ -10,7 +10,11 @@ const Dialogs = (props) => {
                 <DialogItem  dialogsData = {props.state.dialogsData} person = {props.person}/>
             </div>
             <div className={cls.messageBlock}>
-                <MessageItem  messageData = {props.state.messageData}/>
+                <MessageItem  messageData = {props.state.messageData}
+                                newMessageText = {props.state.newMessageText}
+                                createMessage = {props.createMessage}
+                                updateTexareaNewMessage ={props.updateTexareaNewMessage}
+                                />
             </div>
         </div>
     )

@@ -7,8 +7,8 @@ let state = {
             { id: 1, message: "first text posts", likesCount: 12 },
             { id: 2, message: "second text posts", likesCount: 23 }
         ],
-        // строка в которой храниться тест набираемого сообщения
-        newPostText: "test"
+        // строка в которой храниться тест набираемого поста
+        newPostText: ""
     },
     // массив сообщений
     messagesPage: {
@@ -17,6 +17,9 @@ let state = {
             { text: "what is yor name?" },
             { text: "kfkfkf?" }
         ],
+        // строка в которой храниться тест набираемого сообщения
+        newMessageText: "",
+
         dialogsData: [
             { name: "Dimich", id: "1" },
             { name: "Genadich", id: "3" },
@@ -42,12 +45,13 @@ export let updateTexareaNewPost = (changeText) => {
     state.profilePage.newPostText = changeText;
     rerenderEntireTree(state)
 }
+// ==================
 // создание нового поста. В функцию прилетает строка с текстом 
-export let CreatePost = (newPostText = state.profilePage.newPostText) => {
+export let CreatePost = (text = state.profilePage.newPostText) => {
     // создается обьект новый постпост
     let newPost = {
         id: 3,
-        message: newPostText,
+        message: text,
         likesCount: 0
     }
     // пост добавляется в  массив с постами
@@ -56,5 +60,21 @@ export let CreatePost = (newPostText = state.profilePage.newPostText) => {
     state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
-
+// ==================
+// Аналогична Ф с постами только работает с сообщениями
+export let updateTexareaNewMessage = (changeText) => {
+    state.messagesPage.newMessageText = changeText;
+    rerenderEntireTree(state)
+}
+// ============
+// Аналогична Ф с постами только работает с сообщениями
+export let createMessage = (text = state.messagesPage.newMessageText) => {
+    // создается обьект новое сообщение
+    let newMsg = {text: text}
+    // message добавляется в  массив с постами
+    state.messagesPage.messageData.push(newMsg)
+    // строка с текстом очищается
+    state.messagesPage.newMessageText = ''
+    rerenderEntireTree(state)
+}
 export default state;

@@ -18,12 +18,16 @@ const App = (props) => {
         <Navigation />
         <div className="wrapper_content">
           <Route path = '/dialogs' render = { () => <Dialogs state = {props.state.messagesPage} 
-                                                              person = {props.state.person}/> }/>
+                                                              person = {props.state.person}
+                                                              createMessage = {props.createMessage}
+                                                              updateTexareaNewMessage ={props.updateTexareaNewMessage} 
+                                                              /> } />
           <Route path = '/Music' component={Music} />
           <Route path = '/profile' render = { () => <Profile state = {props.state.profilePage} 
                                                               person = {props.state.person}
                                                               createPost = {props.createPost}
-                                                              updateTexareaNewPost ={props.updateTexareaNewPost}/> }/>
+                                                              updateTexareaNewPost ={props.updateTexareaNewPost}
+                                                              /> }/>
           <Route path = '/News' component={News} />
           <Route path = '/Settings' component={Settings} />
         </div>
