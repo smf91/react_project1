@@ -3,17 +3,17 @@ import cls from './ProfileInfo.module.css';
 
 const ProfileInfo = (props) => {
 
-const myProfile = props.personData.find(person => person.myprofile === true)
+// const myProfile = props.personData.find(person => person.myprofile === true)
 
     return (
         <div className = {cls.profileInfo}>
             <div className={cls.avatar}>
-                <img src= {myProfile.img} alt="avatar"/>
+                <img src= {props.myData.img} alt="avatar"/>
             </div>
             <div className={cls.description}>
-                <div>{myProfile.firstName} {myProfile.lastName}</div>
-                <div>{myProfile.city}</div>
-                <div>{myProfile.birthday}</div>
+                <div>{props.myData.firstName} {props.myData.lastName}</div>
+                <div>{props.myData.city}</div>
+                <div>{props.myData.birthday}</div>
             </div>
         </div>
     )

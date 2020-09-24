@@ -3,15 +3,16 @@ import cls from './NewPost.module.scss';
 
 const NewPost = (props) => {
     let newPostElement = React.createRef();
-
     let addPost = () => {
+        props.createPost(props.newPostText)
+    }
+    let onPostChange = () =>{
         let text = newPostElement.current.value;
-        props.createPost(text)
-        newPostElement.current.value = ''
+        props.updateTexareaNewPost(text)
     }
     return (
         <div className={cls.newPostBlock}>
-            <textarea ref={newPostElement}></textarea>
+            <textarea ref={newPostElement} onChange = {onPostChange} value = {props.newPostText}/>
             <button onClick={addPost} >Send</button>
         </div>
     )
