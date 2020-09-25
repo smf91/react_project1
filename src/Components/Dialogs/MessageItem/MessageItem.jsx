@@ -5,11 +5,11 @@ const MessageItem = (props) => {
     let sendMessageText = React.createRef()
     let onMessageChange=() =>{
         let text = sendMessageText.current.value
-        props.updateTexareaNewMessage (text)
+        props.dispatch ({type : "UPDATE-TEXTAREA-NEW-MESSAGE", text : text})
     }
 
     let addMessage = () => {
-        props.createMessage(props.newMessageText)
+        props.dispatch({type : "CREATE-MESSAGE"})
     }
 
 

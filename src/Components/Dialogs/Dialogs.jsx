@@ -12,8 +12,7 @@ const Dialogs = (props) => {
             <div className={cls.messageBlock}>
                 <MessageItem  messageData = {props.state.messageData}
                                 newMessageText = {props.state.newMessageText}
-                                createMessage = {props.createMessage}
-                                updateTexareaNewMessage ={props.updateTexareaNewMessage}
+                                dispatch = {props.dispatch}
                                 />
             </div>
         </div>

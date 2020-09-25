@@ -68,7 +68,10 @@ let store = {
             this._callSubscriber(this)
         }
         else if (action.type === "CREATE-MESSAGE") {
-            this._state.messagesPage.messageData.push(action.text)
+            let newMessage = {
+                text: this._state.messagesPage.newMessageText
+            }
+            this._state.messagesPage.messageData.push(newMessage)
             this._state.messagesPage.newMessageText = ''
             this._callSubscriber(this)
         }

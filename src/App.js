@@ -16,10 +16,10 @@ const App = (props) => {
         <Header />
         <Navigation />
         <div className="wrapper_content">
-          {/* <Route path = '/dialogs' render = { () => <Dialogs state = {props.store.getState().messagesPage} 
+          <Route path = '/dialogs' render = { () => <Dialogs state = {props.store.getState().messagesPage} 
                                                               person = {props.store.getState().person}
                                                               dispatch= {props.store.dispatch.bind(props.store)}
-                                                              /> } /> */}
+                                                              /> } />
           <Route path = '/Music' component={Music} />
           <Route path = '/profile' render = { () => <Profile state = {props.store.getState().profilePage} 
                                                               person = {props.store.getState().person}
