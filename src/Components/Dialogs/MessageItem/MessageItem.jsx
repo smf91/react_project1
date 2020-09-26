@@ -1,15 +1,16 @@
 import React from 'react';
 import cls from './MessageItem.module.scss';
+import { createMessageActionCreater, updateTextareaNewMessageActionCreater } from './../../../redux/state'
 
 const MessageItem = (props) => {
     let sendMessageText = React.createRef()
-    let onMessageChange=() =>{
+    let onMessageChange = () => {
         let text = sendMessageText.current.value
-        props.dispatch ({type : "UPDATE-TEXTAREA-NEW-MESSAGE", text : text})
+        props.dispatch(updateTextareaNewMessageActionCreater(text))
     }
 
     let addMessage = () => {
-        props.dispatch({type : "CREATE-MESSAGE"})
+        props.dispatch(createMessageActionCreater())
     }
 
 
@@ -19,10 +20,10 @@ const MessageItem = (props) => {
         <div className={cls.messageBlock}>
             <div>{messageElement}</div>
             <div className={cls.newMessagElement}>
-                <textarea ref={sendMessageText} 
-                            onChange = {onMessageChange}
-                            value = {props.newMessageText}
-                            />
+                <textarea ref={sendMessageText}
+                    onChange={onMessageChange}
+                    value={props.newMessageText}
+                />
                 <button onClick={addMessage}>Send</button>
             </div>
         </div>
