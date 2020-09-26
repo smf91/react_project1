@@ -1,7 +1,7 @@
 const UPDATE_TEXTAREA_NEW_POST = "UPDATE-TEXTAREA-NEW-POST"
 const CREATE_POST = "CREATE-POST"
 const CREATE_MESSAGE = "CREATE-MESSAGE"
-const UPDATE_TEXTAREA_NEW_MESSAGE="UPDATE-TEXTAREA-NEW-MESSAGE"
+const UPDATE_TEXTAREA_NEW_MESSAGE = "UPDATE-TEXTAREA-NEW-MESSAGE"
 
 let store = {
     _state: {
@@ -23,7 +23,6 @@ let store = {
             ],
             // строка в которой храниться тест набираемого сообщения
             newMessageText: "",
-
             dialogsData: [
                 { name: "Dimich", id: "1" },
                 { name: "Genadich", id: "3" },
@@ -83,19 +82,19 @@ let store = {
     }
 }
 
-export const createPostActionCreater = () =>{
+export const createPostActionCreater = () => {
     return { type: CREATE_POST }
 }
 
-export const updateTextareaNewPostActionCreater = (text) =>{
+export const updateTextareaNewPostActionCreater = (text) => {
     return { type: UPDATE_TEXTAREA_NEW_POST, text: text }
 }
 
-export const createMessageActionCreater = () =>{
+export const createMessageActionCreater = () => {
     return { type: CREATE_MESSAGE }
 }
 
-export const updateTextareaNewMessageActionCreater = (message) =>{
+export const updateTextareaNewMessageActionCreater = (message) => {
     return { type: UPDATE_TEXTAREA_NEW_MESSAGE, text: message }
 }
 
