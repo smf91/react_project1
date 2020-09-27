@@ -3,7 +3,9 @@ import cls from './DialogItem.module.scss';
 import { NavLink } from 'react-router-dom';
 
 const DialogItem = (props) => {
-    let dialogArr = props.person.filter(person => person.myprofile === false)
+    let state = props.store.getState()
+
+    let dialogArr = state.person.person.filter(person => person.myprofile === false)
     let dialogElement =
         dialogArr.map(d => <NavLink to={`/dialogs/${d.id}`}>
             <div className={cls.avatar}>

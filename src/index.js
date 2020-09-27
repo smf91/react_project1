@@ -1,5 +1,5 @@
 import * as serviceWorker from './serviceWorker';
-import store from './redux/state'
+import store from './redux/redux-store'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -17,7 +17,10 @@ let rerenderEntireTree = (store) => {
 // вызываем функцию которая перерисовывает все дерево
 rerenderEntireTree(store)
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(()=>{
+    let state = store
+    rerenderEntireTree(state)
+});
 
 // subscribe(rerenderEntireTree);
 

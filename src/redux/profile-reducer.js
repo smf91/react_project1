@@ -1,7 +1,15 @@
 const UPDATE_TEXTAREA_NEW_POST = "UPDATE-TEXTAREA-NEW-POST"
 const CREATE_POST = "CREATE-POST"
 
-const profileReducer = (state, action) => {
+let initialState = {
+    postsData: [
+        { id: 1, message: "first text posts", likesCount: 12 },
+        { id: 2, message: "second text posts", likesCount: 23 }
+    ],
+    newPostText: ""
+}
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_POST:
             let newPost = {

@@ -1,15 +1,17 @@
 import React from 'react';
 import cls from './MyPosts.module.css';
-import NewPost from './NewPost/NewPost';
+import NewPostContainer from './NewPost/NewPostContainer';
 import Posts from './Posts/Posts';
 
 const MyPosts = (props) => {
-let postsElement = props.postsData.map(p=> <Posts message = {p.message} id={p.id} likesCount={p.likesCount} myData={props.myData}/>);
+    let state = props.store.getState().profilePage.postsData
+    let postsElement = state.map(p=> <Posts message = {p.message} id={p.id} likesCount={p.likesCount} myData={props.myData}/>);
 
     return (
         <div className = {cls.wrapper}>
-            <NewPost newPostText={props.newPostText}
-                    dispatch = {props.dispatch}
+            <NewPostContainer   store = {props.store} 
+                                newPostText={props.newPostText}
+                                dispatch = {props.dispatch}
             />
             {postsElement}
         </div>
