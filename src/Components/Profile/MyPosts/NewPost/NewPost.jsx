@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './NewPost.module.scss';
-import {updateTextareaNewPostActionCreater,createPostActionCreater } from './../../../../redux/state'
+import {updateTextareaNewPostActionCreater,createPostActionCreater } from './../../../../redux/profile-reducer'
 
 const NewPost = (props) => {
     let newPostElement = React.createRef();

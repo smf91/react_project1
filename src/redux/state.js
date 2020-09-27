@@ -1,7 +1,5 @@
-const UPDATE_TEXTAREA_NEW_POST = "UPDATE-TEXTAREA-NEW-POST"
-const CREATE_POST = "CREATE-POST"
-const CREATE_MESSAGE = "CREATE-MESSAGE"
-const UPDATE_TEXTAREA_NEW_MESSAGE = "UPDATE-TEXTAREA-NEW-MESSAGE"
+import dialogsReducer from  './dialogs-reducer'
+import profileReducer from './profile-reducer'
 
 let store = {
     _state: {
@@ -53,50 +51,13 @@ let store = {
         console.log('state changed');
     },
     dispatch(action) { // {type : 'ADD-POST'}
-        if (action.type === CREATE_POST) {
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this)
-        }
-        else if (action.type === UPDATE_TEXTAREA_NEW_POST) {
-            this._state.profilePage.newPostText = action.text;
-            this._callSubscriber(this)
-        }
-        else if (action.type === UPDATE_TEXTAREA_NEW_MESSAGE) {
-            this._state.messagesPage.newMessageText = action.text;
-            this._callSubscriber(this)
-        }
-        else if (action.type === CREATE_MESSAGE) {
-            let newMessage = {
-                text: this._state.messagesPage.newMessageText
-            }
-            this._state.messagesPage.messageData.push(newMessage)
-            this._state.messagesPage.newMessageText = ''
-            this._callSubscriber(this)
-        }
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._callSubscriber(this)
     }
 }
 
-export const createPostActionCreater = () => {
-    return { type: CREATE_POST }
-}
 
-export const updateTextareaNewPostActionCreater = (text) => {
-    return { type: UPDATE_TEXTAREA_NEW_POST, text: text }
-}
-
-export const createMessageActionCreater = () => {
-    return { type: CREATE_MESSAGE }
-}
-
-export const updateTextareaNewMessageActionCreater = (message) => {
-    return { type: UPDATE_TEXTAREA_NEW_MESSAGE, text: message }
-}
 
 export default store;
 window.store = store

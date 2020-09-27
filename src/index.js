@@ -19,8 +19,7 @@ rerenderEntireTree(store)
 
 store.subscribe(rerenderEntireTree);
 
-
-subscribe(rerenderEntireTree);
+// subscribe(rerenderEntireTree);
 
 
 // If you want your app to work offline and load faster, you can change

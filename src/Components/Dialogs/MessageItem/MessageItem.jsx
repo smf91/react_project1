@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './MessageItem.module.scss';
-import { createMessageActionCreater, updateTextareaNewMessageActionCreater } from './../../../redux/state'
+import { createMessageActionCreater, updateTextareaNewMessageActionCreater } from './../../../redux/dialogs-reducer'
 
 const MessageItem = (props) => {
     let sendMessageText = React.createRef()
