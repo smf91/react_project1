@@ -48,9 +48,10 @@ let store = {
         this._callSubscriber = observer
     },
     _callSubscriber() {
-        console.log('state changed');
+        console.log('state change');
     },
-    dispatch(action) { // {type : 'ADD-POST'}
+    dispatch(action){ // {type : 'ADD-POST'}
+    debugger
         this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._callSubscriber(this)
@@ -60,4 +61,4 @@ let store = {
 
 
 export default store;
-window.store = store
+// window.store = store

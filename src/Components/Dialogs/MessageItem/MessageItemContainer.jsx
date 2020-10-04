@@ -2,27 +2,23 @@ import React from 'react';
 import { createMessageActionCreater, updateTextareaNewMessageActionCreater } from './../../../redux/dialogs-reducer'
 import MessageItem from './MessageItem';
 import cls from './MessageItem.module.scss';
+import {connect} from 'react-redux'
 
-const MessageItemContainer = (props) => {
-    let state = props.store.getState().messagesPage
-    // let person = props.store.getState().person
-
-    let onMessageChange = (text) => {
-        props.store.dispatch(updateTextareaNewMessageActionCreater(text))
+const mapStateToProps = (state) => {
+    return {
+        state: state.messagesPage,
+        messageElement : state.messagesPage.messageData.map(el => <div className={cls.message}>{el.text}</div>)
     }
-    let addMessage = () => {
-        props.store.dispatch(createMessageActionCreater())
-    }
-
-    let messageElement = 
-    state.messageData.map(el => <div className={cls.message}>{el.text}</div>) 
-    return (
-        <MessageItem onMessageChange={onMessageChange}
-                    addMessage={addMessage}
-                    messageElement={messageElement}
-                    newMessageText = {state.newMessageText}
-        />
-    )
 }
+const mapDispathToProps = (dispatch) => {
+    return {
+        onMessageChange : (text) => {
+            dispatch(updateTextareaNewMessageActionCreater(text))
+        },
+        addMessage : () => {dispatch(createMessageActionCreater())}
+    }
+}
+
+const MessageItemContainer = connect(mapStateToProps, mapDispathToProps)(MessageItem)
 
 export default MessageItemContainer;

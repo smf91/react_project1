@@ -2,9 +2,6 @@ import React from 'react';
 import cls from './ProfileInfo.module.css';
 
 const ProfileInfo = (props) => {
-
-// const myProfile = props.personData.find(person => person.myprofile === true)
-
     return (
         <div className = {cls.profileInfo}>
             <div className={cls.avatar}>

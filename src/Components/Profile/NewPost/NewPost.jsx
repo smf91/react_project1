@@ -7,15 +7,15 @@ const NewPost = (props) => {
         let text = newPostElement.current.value
         props.onPostChange(text)
     }
-
     return (
         <div className={cls.newPostBlock}>
             <textarea   ref={newPostElement} 
                         onChange={onPostChange}
-                        value={props.newPostText}
+                        value={props.state.newPostText}
             />
             <button onClick={props.addPost} >Send</button>
         </div>
+        
     )
 }
 

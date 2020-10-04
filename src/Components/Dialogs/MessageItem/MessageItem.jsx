@@ -7,18 +7,19 @@ const MessageItem = (props) => {
     let onMessageChange = () => {
         let text = sendMessageText.current.value
         props.onMessageChange(text)
+        
     }
-    let addMessage =()=> {props.addMessage()}
-    
+    let addMessage =()=> {
+        props.addMessage()}
     return (
         <div className={cls.messageBlock}>
             <div>{props.messageElement}</div>
             <div className={cls.newMessagElement}>
                 <textarea ref={sendMessageText}
                     onChange={onMessageChange}
-                    value={props.newMessageText}
+                    value={props.state.newMessageText}
                 />
-                <button onClick={props.addMessage}>Send</button>
+                <button onClick={addMessage}>Send</button>
             </div>
         </div>
     )
