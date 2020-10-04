@@ -1,0 +1,42 @@
+
+.userBlockItem{
+    display: flex;
+    margin: 5px;
+    .leftBlock{
+        background-color: aquamarine;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .avatar{
+            img{
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+            };
+        }
+        .btn{
+            margin: 10px 0 0 0;
+            button{
+                height: 40px;
+                width: 100px;
+            }
+        }
+    }
+    .rightBlock{
+        width: 100%;
+        background-color: burlywood;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .userInfo{
+            display: flex;
+            justify-content: space-between;
+            .userName{}
+            .userCity{}
+        }
+        .userStatus{
+            background-color: #f0f0f0;
+        }
+    }
+}

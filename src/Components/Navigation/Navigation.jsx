@@ -11,6 +11,9 @@ const Navigation =() =>{
             <NavLink exact to="/dialogs" activeClassName = {cls.active}>Dialogs</NavLink>
         </div>
         <div className = {cls.item}>
+            <NavLink exact to="/users" activeClassName = {cls.active}>Users</NavLink>
+        </div>
+        <div className = {cls.item}>
             <NavLink to="/news" activeClassName = {cls.active}>News</NavLink>
         </div>
         <div className = {cls.item}>

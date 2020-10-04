@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+
 let rerenderEntireTree = (store) => {
     ReactDOM.render(
         <React.StrictMode>
@@ -17,12 +18,10 @@ let rerenderEntireTree = (store) => {
 // вызываем функцию которая перерисовывает все дерево
 rerenderEntireTree(store)
 
-store.subscribe(()=>{
-    let state = store
-    rerenderEntireTree(state)
-});
-
-// subscribe(rerenderEntireTree);
+// store.subscribe(()=>{
+//     let state = store
+//     rerenderEntireTree(state)
+// });
 
 
 // If you want your app to work offline and load faster, you can change
