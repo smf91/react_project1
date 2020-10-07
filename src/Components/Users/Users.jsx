@@ -17,10 +17,23 @@ class Users extends React.Component {
             ]
         )
     }
+    onPageChanged =(pageNumber) =>{
+        this.props.setCurrentPage(pageNumber)
+    }
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let  pages =[]
+        for (let i=1; i<=pagesCount; i++) {
+            pages.push(i)
+        }
         return (
             <div>
+                <div className = {cls.pageNumbers}>
+                {pages.map (p =>{
+                return <div onClick={() => {this.onPageChanged(p)}} className = {this.props.currentPage === p && cls.selectedPage} > {p}</div>
+                })}
+                </div>
                 {
                     this.props.users.map(u => <div className={cls.userBlockItem} key={u.id}>
                         <div className={cls.leftBlock}>
