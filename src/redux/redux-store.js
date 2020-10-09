@@ -3,7 +3,6 @@ import profileReducer from './profile-reducer'
 import personReducer from './person-reducer'
 import { createStore, combineReducers } from "redux"
 import usersReducer from './users-reducer'
-// const { createStore, combineReducers } = require("redux");
 
 
 let reducers = combineReducers({
@@ -15,5 +14,5 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
-
+window.store = store
 export default store;

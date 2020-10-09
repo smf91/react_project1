@@ -1,5 +1,8 @@
 import React from 'react'
 import cls from './Users.module.scss';
+import usersicon from '../../assets/images/usericon.png'
+import {NavLink} from 'react-router-dom';
+
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -18,7 +21,9 @@ let Users = (props) => {
                 props.users.map(u => <div className={cls.userBlockItem} key={u.id}>
                     <div className={cls.leftBlock}>
                         <div className={cls.avatar}>
-                            <img src={u.photos.small} alt="avatar" />
+                        <NavLink to ={`/profile/${u.id}`}>
+                            <img src={u.photos.small != null ? u.photos.small : usersicon} alt="avatar" />
+                        </NavLink>
                         </div>
                         <div className={cls.btn}>
                             {u.followed ?

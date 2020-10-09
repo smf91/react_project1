@@ -1,5 +1,5 @@
 import React from 'react';
-import { toogleIsFetchingAC, setTotalUsersCountAC, setCurrentPageAC, followAC, unfollowAC, setUsersAC } from './../../redux/users-reducer'
+import { toogleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers } from './../../redux/users-reducer'
 import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
@@ -53,15 +53,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispathToProps = (dispatch) => {
-    return {
-        toogleIsFetching: (value) => { dispatch(toogleIsFetchingAC(value)) },
-        setTotalUsersCount: (totalCount) => { dispatch(setTotalUsersCountAC(totalCount)) },
-        follow: (userID) => { dispatch(followAC(userID)) },
-        unfollow: (userID) => { dispatch(unfollowAC(userID)) },
-        setUsers: (users) => { dispatch(setUsersAC(users)) },
-        setCurrentPage: (currentPage) => { dispatch(setCurrentPageAC(currentPage)) }
-    }
-}
+// const mapDispathToProps = (dispatch) => {
+//     return {
+//         toogleIsFetching: (value) => { dispatch(toogleIsFetchingAC(value)) },
+//         setTotalUsersCount: (totalCount) => { dispatch(setTotalUsersCountAC(totalCount)) },
+//         follow: (userID) => { dispatch(followAC(userID)) },
+//         unfollow: (userID) => { dispatch(unfollowAC(userID)) },
+//         setUsers: (users) => { dispatch(setUsersAC(users)) },
+//         setCurrentPage: (currentPage) => { dispatch(setCurrentPageAC(currentPage)) }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispathToProps)(UsersContainer)
+export default connect(mapStateToProps,{toogleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers })(UsersContainer)
