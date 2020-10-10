@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { toogleIsFetching, setCurrentProfile} from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import NewPostContainer from './NewPost/NewPostContainer';
+// import NewPostContainer from './NewPost/NewPostContainer';
 import PostsContainer from './Posts/PostsContainer'
 import * as axios from 'axios'
 import { withRouter } from 'react-router-dom';

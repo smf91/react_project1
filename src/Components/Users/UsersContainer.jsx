@@ -3,7 +3,7 @@ import { toogleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow,
 import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
-import * as axios from 'axios'
+// import * as axios from 'axios'
 import {UserAPI} from '../../api/api'
 
 class UsersContainer extends React.Component {

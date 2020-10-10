@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './DialogItem.module.scss';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 const DialogItem = (props) => {
     return(
