@@ -1,7 +1,8 @@
 import React from 'react'
 import cls from './Users.module.scss';
 import usersicon from '../../assets/images/usericon.png'
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {UserAPI} from '../../api/api'
 
 
 let Users = (props) => {
@@ -21,15 +22,31 @@ let Users = (props) => {
                 props.users.map(u => <div className={cls.userBlockItem} key={u.id}>
                     <div className={cls.leftBlock}>
                         <div className={cls.avatar}>
-                        <NavLink to ={`/profile/${u.id}`}>
-                            <img src={u.photos.small != null ? u.photos.small : usersicon} alt="avatar" />
-                        </NavLink>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <img src={u.photos.small != null ? u.photos.small : usersicon} alt="avatar" />
+                            </NavLink>
                         </div>
                         <div className={cls.btn}>
                             {u.followed ?
-                                <button onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
+                                <button onClick={() => {
+                                    UserAPI.unfollow(u.id)
+                                        .then(data => {
+                                            if (data.resultCode === 0) {
+                                                props.unfollow(u.id)
+                                            }
+                                        })
+                                }}>
+                                    Unfollow</button>
                                 :
-                                <button onClick={() => { props.follow(u.id) }} >Follow</button>
+                                <button onClick={() => {
+                                    UserAPI.follow(u.id)
+                                        .then(data => {
+                                            // console.log(data.resultCode);
+                                            if (data.resultCode === 0) {
+                                                props.follow(u.id)
+                                            }
+                                        })
+                                }} >Follow</button>
                             }
                         </div>
                     </div>

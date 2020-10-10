@@ -4,25 +4,24 @@ import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import * as axios from 'axios'
+import {UserAPI} from '../../api/api'
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toogleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count =${this.props.pageSize}`)
-            .then(response => {
+        UserAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                 this.props.toogleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber) => {
         this.props.toogleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count = ${this.props.pageSize}`)
-            .then(response => { 
+        UserAPI.getUsers(pageNumber, this.props.pageSize).then(data => { 
                 this.props.toogleIsFetching(false)
-                this.props.setUsers(response.data.items) 
+                this.props.setUsers(data.items) 
             })
     }
     render() {
@@ -52,7 +51,7 @@ const mapStateToProps = (state) => {
         isFetching : state.usersPage.isFetching
     }
 }
-
+//  было
 // const mapDispathToProps = (dispatch) => {
 //     return {
 //         toogleIsFetching: (value) => { dispatch(toogleIsFetchingAC(value)) },
@@ -63,5 +62,5 @@ const mapStateToProps = (state) => {
 //         setCurrentPage: (currentPage) => { dispatch(setCurrentPageAC(currentPage)) }
 //     }
 // }
-
+// стало
 export default connect(mapStateToProps,{toogleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers })(UsersContainer)
