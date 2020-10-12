@@ -1,34 +1,21 @@
 import React from 'react';
-import { toggleFollowingInProgress, toggleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers } from './../../redux/users-reducer'
+import { getUsersTC, toggleFollowingInProgress, toggleIsFetching, setTotalUsersCount, setCurrentPage, followTC, unfollowTC, setUsers, onPageChangetTC } from './../../redux/users-reducer'
 import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
-// import * as axios from 'axios'
-import {UserAPI} from '../../api/api'
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        UserAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        UserAPI.getUsers(pageNumber, this.props.pageSize).then(data => { 
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items) 
-            })
+        this.props.onPageChangetTC(pageNumber, this.props.pageSize)
     }
     render() {
         return <>
         {this.props.isFetching ? <Fetching/> 
-                                :
-                                <Users {...this.props} onPageChanged={this.onPageChanged} />}
+                                :<Users {...this.props} onPageChanged={this.onPageChanged} />}
             </>
     }
 
@@ -56,4 +43,13 @@ const mapStateToProps = (state) => {
 //     }
 // }
 // стало
-export default connect(mapStateToProps,{toggleFollowingInProgress, toggleIsFetching, setTotalUsersCount, setCurrentPage, follow, unfollow, setUsers })(UsersContainer)
+export default connect(mapStateToProps,{    toggleFollowingInProgress, 
+                                            toggleIsFetching, 
+                                            setTotalUsersCount, 
+                                            setCurrentPage, 
+                                            followTC, 
+                                            unfollowTC, 
+                                            setUsers,
+                                            getUsersTC,
+                                            onPageChangetTC 
+                                        }) (UsersContainer)

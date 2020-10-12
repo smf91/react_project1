@@ -1,17 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
-import { toogleIsFetching, setUserData } from './../../redux/auth-reducer'
-import {UserAPI} from '../../api/api'
+import { toogleIsFetching, setUserData, authMeTC } from './../../redux/auth-reducer'
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        this.props.toogleIsFetching(true)
-        UserAPI.getAuthMe(this.props.currentPage, this.props.pageSize).then(data => {
-                if (data.resultCode === 0)  {
-                    this.props.setUserData(data)
-                }
-            })
+        this.props.authMeTC()
     }
     render() {
         return <>
@@ -27,4 +21,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { toogleIsFetching, setUserData })(HeaderContainer)
+export default connect(mapStateToProps, { toogleIsFetching, 
+                                            setUserData,
+                                            authMeTC
+                                        })(HeaderContainer)

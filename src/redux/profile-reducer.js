@@ -1,3 +1,5 @@
+import { UserAPI } from '../api/api'
+
 const UPDATE_TEXTAREA_NEW_POST = "UPDATE-TEXTAREA-NEW-POST"
 const CREATE_POST = "CREATE-POST"
 const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE"
@@ -49,5 +51,18 @@ export const toogleIsFetching = (IsFetching) => ({ type: TOGGLE_IS_FETCHING, IsF
 export const setCurrentProfile = (currentProfileInfo) => ({ type: SET_CURRENT_PROFILE, currentProfileInfo})
 export const createPostActionCreater = () => ({ type: CREATE_POST })
 export const updateTextareaNewPostActionCreater = (text) => ({ type: UPDATE_TEXTAREA_NEW_POST, text: text })
+
+// Thunk creater
+export const getProfileInfoTC = (userId) => {
+
+    return (dispatch) => {
+        dispatch(toogleIsFetching(true))
+        UserAPI.getProfileInfo(userId)
+            .then(data => {
+                dispatch(toogleIsFetching(false))
+                dispatch(setCurrentProfile(data))
+            })
+    }
+}
 
 export default profileReducer;
