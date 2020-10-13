@@ -1,8 +1,18 @@
 import React from 'react'
-// import cls from './Login.module.scss';
+import cls from './Login.module.scss';
 
 const Login =() =>{
-    return <h1>LOGIN</h1>
+    return (
+        <div className ={cls.wrapper}>
+            <div className = {cls.logonBlock}>
+                <h1>Sign in</h1>
+                <input type="text"/>
+                <input type="text"/>
+                <button>ok</button>
+                
+            </div>
+        </div>
+    )
 }
 
 export default Login

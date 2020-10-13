@@ -3,20 +3,21 @@ import { connect } from 'react-redux'
 import { toogleIsFetching, setCurrentProfile, getProfileInfoTC } from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import PostsContainer from './Posts/PostsContainer'
+import NewPostContainer from './NewPost/NewPostContainer'
 import { withRouter } from 'react-router-dom';
-import withAuthRedirect from '../../hoc/withAuthRedirect'
+// import withAuthRedirect from '../../hoc/withAuthRedirect'
 import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) { userId = 2 }
+        if (!userId) { userId = 15 }
         this.props.getProfileInfoTC(userId)
     }
     render() {
         return <>
             <ProfileInfo profileInfo={this.props.profileInfo} />
-            {/* <NewPostContainer  /> */}
+            <NewPostContainer  />
             <PostsContainer />
         </>
     }
@@ -36,7 +37,7 @@ export default compose(
         setCurrentProfile,
         getProfileInfoTC
     }),
-    withAuthRedirect,
+    // withAuthRedirect,
     withRouter
 )(ProfileContainer)
 

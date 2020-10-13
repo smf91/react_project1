@@ -1,17 +1,21 @@
 .wrapper{
+  overflow: hidden;
   display: grid;
-  width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  // margin: 0 auto;
+  min-height: 100vh;
 
   grid-template-areas:
   "h h"
   "n c";
 
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 1fr 11fr;
   /* grid-gap: 10px; */
 }
 .wrapper_content{
+  margin: 2px;
+  overflow: auto;
   grid-area:  c;
-  background-color: cornflowerblue;
+  background-color: #FFFFFF;
 }

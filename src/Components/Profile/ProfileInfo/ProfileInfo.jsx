@@ -1,6 +1,7 @@
 import React from 'react';
-import cls from './ProfileInfo.module.css';
+import cls from './ProfileInfo.module.scss';
 import Fetching from '../../Common/Fetching/Fetching'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
     if (!props.profileInfo){
@@ -10,11 +11,11 @@ const ProfileInfo = (props) => {
         return (
             <div className = {cls.profileInfo}>
                 <div className={cls.avatar}>
-                    dddd
-                    <img src= {props.profileInfo.photos.small} alt="avatar"/>
+                    <img src= {props.profileInfo.photos.large} alt="avatar"/>
                 </div>
                 <div className={cls.description}>
-                    {/* <div>{props.myData.firstName} {props.myData.lastName}</div> */}
+                    <div>{props.profileInfo.fullName}</div>
+                    <ProfileStatus status = {"Hello, I am faind!"}/>
                     {/* <div>{props.myData.city}</div> */}
                     {/* <div>{props.myData.birthday}</div> */}
                 </div>

@@ -1,0 +1,5 @@
+https://coolors.co/2d3142-bfc0c0-ffffff-ef8354-4f5d75
+
+/* Array */
+["2d3142","bfc0c0","ffffff","ef8354","4f5d75"]
+
