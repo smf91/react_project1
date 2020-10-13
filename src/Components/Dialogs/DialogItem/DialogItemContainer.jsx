@@ -20,7 +20,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispathToProps = () =>{}
-
 const DialogItemContainer = connect (mapStateToProps, mapDispathToProps)(DialogItem)
 
 export default DialogItemContainer;

@@ -29,7 +29,6 @@ export const toogleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 
 // Thunk creater
 export const authMeTC = () => {
-
     return (dispatch) => {
         dispatch(toogleIsFetching(true))
         UserAPI.getAuthMe().then(data => {

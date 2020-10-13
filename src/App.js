@@ -3,11 +3,12 @@ import './App.scss';
 import Navigation from './Components/Navigation/Navigation';
 import HeaderContainer from './Components/Header/HeaderContainer';
 import ProfileContainer from './Components/Profile/ProfileContainer';
-import Dialogs from './Components/Dialogs/Dialogs';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Music from './Components/Music/Music';
 import News from './Components/News/News';
 import Settings from './Components/Settings/Settings';
 import UsersContainer from './Components/Users/UsersContainer';
+import Login from './Components/Login/Login';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 import {Provider} from 'react-redux';
@@ -22,11 +23,12 @@ const App = (props) => {
         <HeaderContainer />
         <Navigation />
         <div className="wrapper_content">
-          <Route path = '/dialogs' render = { () => <Dialogs /> } />
+          <Route path = '/dialogs' render = { () => <DialogsContainer /> } />
           <Route path = '/Music' component={Music} />
           <Route path = '/profile/:userId?' render = { () => <ProfileContainer /> }/>
           <Route path = '/users' render = { () => <UsersContainer /> }/>
           <Route path = '/News' component={News} />
+          <Route path = '/login' component={Login} />
           <Route path = '/Settings' component={Settings} />
         </div>
       </div>
