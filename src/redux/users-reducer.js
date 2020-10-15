@@ -1,5 +1,5 @@
 // import { bindActionCreators } from "redux"
-import { UserAPI } from '../api/api'
+import { followAPI, userAPI } from '../api/api'
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -81,7 +81,7 @@ export const getUsersTC = (currentPage, pageSize) => {
 
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
-        UserAPI.getUsers(currentPage, pageSize).then(data => {
+        userAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
@@ -94,7 +94,7 @@ export const onPageChangetTC = (pageNumber, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(pageNumber))
-        UserAPI.getUsers(pageNumber, pageSize).then(data => { 
+        userAPI.getUsers(pageNumber, pageSize).then(data => { 
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items)) 
         })
@@ -107,7 +107,7 @@ export const followTC = (userID) => {
 
     return (dispatch) => {
         dispatch(toggleFollowingInProgress(true, userID))
-        UserAPI.follow(userID)
+        followAPI.follow(userID)
         .then(data => {if (data.resultCode === 0) {dispatch(follow(userID))}
         dispatch(toggleFollowingInProgress(false, userID))
         })
@@ -117,7 +117,7 @@ export const unfollowTC = (userID) => {
 
     return (dispatch) => {
         dispatch(toggleFollowingInProgress(true, userID))
-        UserAPI.unfollow(userID)
+        followAPI.unfollow(userID)
         .then(data => {if (data.resultCode === 0) {dispatch(unfollow(userID))}
         dispatch(toggleFollowingInProgress(false, userID))
         })

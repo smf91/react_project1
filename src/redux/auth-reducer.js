@@ -1,4 +1,4 @@
-import { UserAPI } from '../api/api'
+import { userAPI } from '../api/api'
 
 const SET_USER_DATA = "SET_USER_DATA"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
@@ -31,7 +31,7 @@ export const toogleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const authMeTC = () => {
     return (dispatch) => {
         dispatch(toogleIsFetching(true))
-        UserAPI.getAuthMe().then(data => {
+        userAPI.getAuthMe().then(data => {
                 if (data.resultCode === 0)  {
                     dispatch(setUserData(data))
                 }

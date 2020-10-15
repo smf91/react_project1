@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { toogleIsFetching, setCurrentProfile, getProfileInfoTC } from './../../redux/profile-reducer'
+import { updateStatusTC, getStatusTC,toogleIsFetching, setCurrentProfile, getProfileTC } from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import PostsContainer from './Posts/PostsContainer'
-import NewPostContainer from './NewPost/NewPostContainer'
+// import NewPost from './NewPost/NewPost'
 import { withRouter } from 'react-router-dom';
 // import withAuthRedirect from '../../hoc/withAuthRedirect'
 import { compose } from 'redux';
@@ -11,13 +11,18 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) { userId = 15 }
-        this.props.getProfileInfoTC(userId)
+        if (!userId) { userId = 11952 }
+        this.props.getProfileTC(userId)
+        this.props.getStatusTC(userId)
+        // this.props.updateStatusTC()
     }
     render() {
         return <>
-            <ProfileInfo profileInfo={this.props.profileInfo} />
-            <NewPostContainer  />
+            <ProfileInfo profileInfo={this.props.profileInfo}
+                        status={this.props.status}
+                        updateStatus = {this.props.updateStatusTC}
+            />
+            {/* <NewPost  /> */}
             <PostsContainer />
         </>
     }
@@ -26,6 +31,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.currentProfile,
+        status: state.profilePage.status
     }
 }
 
@@ -33,9 +39,11 @@ const mapStateToProps = (state) => {
 // вторым параметром передается обьект первым функции(функции применяются в обратном порядке)
 export default compose(
     connect(mapStateToProps, {
+        updateStatusTC,
+        getStatusTC,
         toogleIsFetching,
         setCurrentProfile,
-        getProfileInfoTC
+        getProfileTC
     }),
     // withAuthRedirect,
     withRouter
