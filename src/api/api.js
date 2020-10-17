@@ -31,9 +31,28 @@ export const userAPI = {
     }
 }
 
+export const dialogsAPI = {
+    sendMsg() {
+        return instans.post(`dialogs/{}/messages`)
+            .then(response => {
+                return response.data
+            })
+    },
+}
+
 export const authAPI = {
     authMe() {
         return instans.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    },
+    loginhMe(loginObj) {
+        return instans.post(`auth/login`, { email : loginObj.email, 
+                                            password : loginObj.password, 
+                                            rememberMe:loginObj.rememberMe,
+                                            captcha: loginObj.captcha
+                                        })
             .then(response => {
                 return response.data
             })

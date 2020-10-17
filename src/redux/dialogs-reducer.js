@@ -1,5 +1,6 @@
-const CREATE_MESSAGE = "CREATE-MESSAGE"
-const UPDATE_TEXTAREA_NEW_MESSAGE = "UPDATE-TEXTAREA-NEW-MESSAGE"
+import { dialogsAPI } from '../api/api'
+
+const SEND_MESSAGE = "SEND_MESSAGE-MESSAGE"
 
 let initialState = {
     messageData: [
@@ -7,7 +8,6 @@ let initialState = {
         { text: "what is yor name?" },
         { text: "swssw?" }
     ],
-    newMessageText: "",
     dialogsData: [
         { name: "Dimich", id: "1" },
         { name: "Genadich", id: "3" },
@@ -20,19 +20,13 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_TEXTAREA_NEW_MESSAGE:
-            return{
-                ...state,
-                newMessageText : action.text
-            }
             // то же самое
             // let stateCopy = {...state, newMessageText :[...state.newMessageText] }
             // stateCopy.newMessageText = action.text;
             // return stateCopy
-        case CREATE_MESSAGE:{
+        case SEND_MESSAGE:{
             return{
                 ...state,
-                newMessageText : '',
                 messageData :[...state.messageData, {text:state.newMessageText}]
                 
             }
@@ -51,9 +45,18 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
+export const sendMessage = (newMessageText) => ({ type: SEND_MESSAGE, newMessageText })
 
-
-export const createMessageActionCreater = () => ({ type: CREATE_MESSAGE })
-export const updateTextareaNewMessageActionCreater = (message) => ({ type: UPDATE_TEXTAREA_NEW_MESSAGE, text: message })
+// Thunk creater
+export const sendMsgTC = () => {
+    return (dispatch) => {
+        // dispatch(toogleIsFetching(true))
+        dialogsAPI.sendMsg().then(data => {
+                if (data.resultCode === 0)  {
+                    dispatch(sendMessage(data))
+                }
+            })
+    }
+}
 
 export default dialogsReducer;

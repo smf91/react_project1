@@ -1,7 +1,7 @@
 import React from 'react';
 import DialogItemContainer from './DialogItem/DialogItemContainer';
 import cls from './Dialogs.module.scss';
-import MessageItemContainer from './MessageItem/MessageItemContainer';
+import MessageContainer from './MessageItem/MessageContainer';
 import { connect } from 'react-redux'
 import withAuthRedirect from '../../hoc/withAuthRedirect'
 import { compose } from 'redux';
@@ -14,7 +14,7 @@ class DialogsContainer extends React.Component {
                     <DialogItemContainer />
                 </div>
                 <div className={cls.messageBlock}>
-                    <MessageItemContainer />
+                    <MessageContainer />
                 </div>
             </div>
         )

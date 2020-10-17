@@ -4,6 +4,7 @@ class ProfileStatus extends React.Component {
 
     state = {
         editMode: false,
+        // локальный статус = статусу из пропсов (глобального стейта)
         status: this.props.status
     }
     activateEditMode = () => {
@@ -18,15 +19,16 @@ class ProfileStatus extends React.Component {
         this.props.updateStatus(this.state.status)
     }
     onSatatusChange = (e) => {
+        // получаем локальный стейт и меняем свойство статус значение  которое вводит пользователь
         this.setState({
-            status: e.currentTarget.value
+            status : e.currentTarget.value
         })
     }
     //  метод перерисовывает компоненту после изменения локального стейта (предыдущий пропс и стейт )
     componentDidUpdate(prevProps, prevState) {
         //  проверяем есть ли изменения в текущем state  по сравнению с предыдущем
         // тогда синхронизируй state
-        if (prevProps.status !== this.state.status) {
+        if (prevProps.status !== this.props.status) {
             this.setState({ 
                 status: this.props.status
             })
@@ -38,12 +40,13 @@ class ProfileStatus extends React.Component {
                 <div>
                     {!this.state.editMode &&
                         <div>
-                            <span onDoubleClick={this.activateEditMode}>{this.props.status || "ooooo"} </span>
+                            <span onDoubleClick={this.activateEditMode}>{this.props.status || "_____"} </span>
                         </div>
                     }
                     {this.state.editMode &&
                         <div>
-                            <input onChange={this.onSatatusChange} autoFocus={true} onBlur={this.deactivateEditMode} value={this.status} />
+                            <input onChange={this.onSatatusChange} autoFocus={true} 
+                                    onBlur={this.deactivateEditMode} value={this.state.status} />
                         </div>
                     }
                 </div>
