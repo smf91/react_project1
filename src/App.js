@@ -8,7 +8,7 @@ import Music from './Components/Music/Music';
 import News from './Components/News/News';
 import Settings from './Components/Settings/Settings';
 import UsersContainer from './Components/Users/UsersContainer';
-import Login from './Components/Login/Login';
+import Login from './Components/Login/LoginContainer';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 import {Provider} from 'react-redux';

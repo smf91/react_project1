@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateStatusTC, getStatusTC,toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from './../../redux/profile-reducer'
+import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import PostsContainer from './Posts/PostsContainer'
 import { Field, reduxForm } from 'redux-form'
@@ -12,7 +12,7 @@ import { compose } from 'redux'
 import { requared, maxLenghtCreater } from '../../utils/validators/validator'
 // импортируем кастомную Texarea
 import { Textarea } from '../Common/FormControls/FormControls'
-
+import cls from './ProfileContainer.module.scss'
 
 
 class ProfileContainer extends React.Component {
@@ -25,15 +25,15 @@ class ProfileContainer extends React.Component {
         // this.props.updateStatusTC()
     }
     sendPost = (values) => {
-        this.props.createPostAC (values.textNewPost)
+        this.props.createPostAC(values.textNewPost)
     }
     render() {
         return <>
             <ProfileInfo profileInfo={this.props.profileInfo}
-                        status={this.props.status}
-                        updateStatus = {this.props.updateStatusTC}
+                status={this.props.status}
+                updateStatus={this.props.updateStatusTC}
             />
-            <AddPostFormRF  onSubmit ={this.sendPost}/>
+            <AddPostFormRF onSubmit={this.sendPost} />
             <PostsContainer />
         </>
     }
@@ -41,23 +41,25 @@ class ProfileContainer extends React.Component {
 
 let maxLenght30 = maxLenghtCreater(30)
 
-const AddPostForm= (props) =>{
-    return(
-            <form onSubmit={props.handleSubmit}>
+const AddPostForm = (props) => {
+    return (
+        <div className ={cls.newPostBlock}>
+            <form onSubmit={props.handleSubmit} >
                 <div>
                     <Field placeholder={"text message"}
-                            // через name  получаем доступ к данным строки в обьекте AddPostFormRF
-                            name={"textNewPost"}
-                            //  говорим redux-form  какую форму отрисовать (в данном случае кастомная форма)
-                            component={Textarea} 
-                            //  передаем нужные валидаторы для данного Field
-                            validate ={[requared, maxLenght30]} 
+                        // через name  получаем доступ к данным строки в обьекте AddPostFormRF
+                        name={"textNewPost"}
+                        //  говорим redux-form  какую форму отрисовать (в данном случае кастомная форма)
+                        component={Textarea}
+                        //  передаем нужные валидаторы для данного Field
+                        validate={[requared, maxLenght30]}
                     />
                 </div>
                 <div>
                     <button>send</button>
                 </div>
             </form>
+        </div>
     )
 }
 //  отдаем форму в reduxForm  и получившийся контейнер NewPostRF монтируем в ProfileContainer

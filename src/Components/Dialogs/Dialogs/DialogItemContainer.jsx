@@ -4,8 +4,6 @@ import { NavLink } from 'react-router-dom';
 import {connect} from 'react-redux'
 import DialogItem from './DialogItem'
 
-
-
 const mapStateToProps = (state) => {
     let dialogArr = state.person.person.filter(person => person.myprofile === false)
     return {

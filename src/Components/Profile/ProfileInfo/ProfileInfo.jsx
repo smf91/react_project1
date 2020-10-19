@@ -14,10 +14,12 @@ const ProfileInfo = (props) => {
                     <img src= {props.profileInfo.photos.large} alt="avatar"/>
                 </div>
                 <div className={cls.description}>
-                    <div>{props.profileInfo.fullName}</div>
                     <ProfileStatus status = {props.status} 
                                     updateStatus = {props.updateStatus}
                     />
+                    <div className={cls.descriptionName}>
+                        {props.profileInfo.fullName}
+                    </div>
                     {/* <div>{props.myData.city}</div> */}
                     {/* <div>{props.myData.birthday}</div> */}
                 </div>

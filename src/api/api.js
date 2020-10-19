@@ -47,12 +47,18 @@ export const authAPI = {
                 return response.data
             })
     },
-    loginhMe(loginObj) {
-        return instans.post(`auth/login`, { email : loginObj.email, 
-                                            password : loginObj.password, 
-                                            rememberMe:loginObj.rememberMe,
-                                            captcha: loginObj.captcha
+    loginMe(formData) {
+        return instans.post(`auth/login`, { email : formData.email, 
+                                            password : formData.password, 
+                                            rememberMe:formData.rememberMe,
+                                            // captcha: data.captcha
                                         })
+            .then(response => {
+                return response.data
+            })
+    },
+    logoutMe() {
+        return instans.delete(`auth/login`,)
             .then(response => {
                 return response.data
             })

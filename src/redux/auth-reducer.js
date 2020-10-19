@@ -7,7 +7,6 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 let initialState = {
         data: null,
         isFetching : false,
-        loginData : null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -21,15 +20,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state, isFetching : action.isFetching
             }
-        case SET_LOGIN_DATA:
-            debugger
-            return {
-                ...state, loginData : action.loginData
-            }
         default:
             return state
     }
 }
+
 export const setLoginData = (loginData) => ({ type: SET_LOGIN_DATA, loginData  })
 export const setUserData = (data) => ({ type: SET_USER_DATA, data  })
 export const toogleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
@@ -46,15 +41,23 @@ export const authMeTC = () => {
     }
 }
 
-export const loginTC = (loginData) => (dispatch) => {
-    debugger
-    dispatch(setLoginData(loginData))
-    authAPI.loginhMe(loginData)
+export const loginTC = (formData) => (dispatch) => {
+    authAPI.loginMe(formData)
         .then(data => {
+            if (data.resultCode === 0) {
+                console.log('login it\'s ok!!');
+                dispatch(authMeTC())
+            }
+        })
+}
+
+export const logoutTC = () => (dispatch) => {
+    // dispatch(setLoginData(loginData))
+    authAPI.logoutMe().then(data => {
             // dispatch(toogleIsFetching(false))
             if (data.resultCode === 0) {
-                console.log('its ok!!!!!!');
-                // dispatch(setUserStatus(status))
+                console.log('logout it\'s ok!');
+                dispatch(authMeTC(null))
             }
         })
 }

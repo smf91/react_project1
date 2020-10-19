@@ -1,9 +1,18 @@
 .profileInfo {
-    display: flex;
+    margin: 5px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 6fr 6fr;
+    grid-gap: 0.5vw;
     .avatar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: blue;
     }
     .description{
+        display: flex;
+        flex-direction: column;
         background-color: red;
     }
 }

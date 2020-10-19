@@ -1,4 +1,28 @@
 .formBlock{
-    .formControl{}
-    .msgError{}
+    .formControl{
+        position: relative;
+    } 
+}
+
+.fieldError{
+    textarea{
+        // background-color: yellow;
+        border: 1px solid red !important;
+    }
+}
+.msgError{
+    margin-top: 10px;
+    background-color: red;
+}
+
+.msgError1{
+    border-radius: 2px;
+    background-color: RGBA(255, 0, 0, 0.8);;
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: -110%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
