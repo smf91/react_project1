@@ -44,7 +44,7 @@ const MessageForm = (props) => {
                         validate={[requared, maxLenght300]}
                         />
             </div>
-            <div>
+            <div className ={ cls.buttonBlock}>
                 <button>send</button>
             </div>
         </form>

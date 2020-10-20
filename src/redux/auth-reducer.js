@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form'
 import { authAPI } from '../api/api'
 
 const SET_LOGIN_DATA = "SET_LOGIN_DATA"
@@ -45,18 +46,19 @@ export const loginTC = (formData) => (dispatch) => {
     authAPI.loginMe(formData)
         .then(data => {
             if (data.resultCode === 0) {
-                console.log('login it\'s ok!!');
                 dispatch(authMeTC())
+            } else {
+                //  специальный action creater  из redux-form 
+                // (в ней передаем  какую форму и либо имя поля либо _error  указывающий всю форму)
+                let action = stopSubmit ("login", {_error : data.messages.length === 0 ?'somsing error' : data.messages[0] })
+                dispatch (action)
             }
         })
 }
 
 export const logoutTC = () => (dispatch) => {
-    // dispatch(setLoginData(loginData))
     authAPI.logoutMe().then(data => {
-            // dispatch(toogleIsFetching(false))
             if (data.resultCode === 0) {
-                console.log('logout it\'s ok!');
                 dispatch(authMeTC(null))
             }
         })

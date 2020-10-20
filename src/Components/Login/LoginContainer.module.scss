@@ -50,3 +50,16 @@
         }
     }
 }
+
+.formSummaryError{
+    height: 25px;
+    width: 300px;
+    border-radius: 2px;
+    background-color: RGBA(255, 0, 0, 0.8);;
+    z-index: 3;
+    position: absolute;
+    display: flex;
+    top: 30%;
+    justify-content: center;
+    align-items: center;
+}

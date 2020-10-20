@@ -4,7 +4,7 @@ import cls from './LoginContainer.module.scss';
 import {loginTC} from '../../redux/auth-reducer'
 
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import {requared} from '../../utils/validators/validator'
 import { Input } from '../Common/FormControls/FormControls'
@@ -15,6 +15,9 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         console.log(formData)
         props.loginTC(formData)
+    }
+    if (props.data !== null){
+        return <Redirect to ={"/profile"}/>
     }
     return (
         <div className={cls.wrapper}>
@@ -33,14 +36,16 @@ const LoginForm = (props) => {
             <Field placeholder={"password"} type={"password"}  name={"password"} component={Input} validate = {[requared]} />
             <div><Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me</div>
             <button>ok</button>
+            {props.error && <div className ={cls.formSummaryError}> {props.error} </div>}
         </form>
     )
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        data : state.auth.data
+    }
+}
 
 //  отдаем форму в reduxForm  и получившийся контейнер LoginReduxForm монтируем в Login
 const LoginReduxForm = reduxForm({
@@ -50,7 +55,7 @@ const LoginReduxForm = reduxForm({
     (LoginForm)
 
 export default compose(
-    connect(null, {
+    connect(mapStateToProps, {
         loginTC
     }),
     // withAuthRedirect,
