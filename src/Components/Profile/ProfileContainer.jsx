@@ -4,7 +4,6 @@ import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getPr
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import PostsContainer from './Posts/PostsContainer'
 import { Field, reduxForm } from 'redux-form'
-// import NewPost from './NewPost/NewPost'
 import { withRouter } from 'react-router-dom'
 // import withAuthRedirect from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'
@@ -17,8 +16,13 @@ import cls from './ProfileContainer.module.scss'
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let userId = this.props.match.params.userId
-        if (!userId) { userId = 11952 }
+        let userId = null
+        if (!this.props.match.params.userId && !this.props.autorisedUserId) {
+            this.props.history.push('/login')
+        }
+        else {
+            userId = this.props.match.params.userId || this.props.autorisedUserId.id
+        }
         this.props.getProfileTC(userId)
         // делаем запрос за статусом пользователя
         this.props.getStatusTC(userId)
@@ -43,7 +47,7 @@ let maxLenght30 = maxLenghtCreater(30)
 
 const AddPostForm = (props) => {
     return (
-        <div className ={cls.newPostBlock}>
+        <div className={cls.newPostBlock}>
             <form onSubmit={props.handleSubmit} >
                 <div>
                     <Field placeholder={"text message"}
@@ -71,14 +75,14 @@ const AddPostFormRF = reduxForm({
 const mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.currentProfile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        autorisedUserId: state.auth.data
     }
 }
 //  оборачиваем компоненту с помощью compose
 // вторым параметром передается обьект первым функции(функции применяются в обратном порядке)
 export default compose(
     connect(mapStateToProps, {
-        // loginTC,
         createPostAC,
         updateStatusTC,
         getStatusTC,

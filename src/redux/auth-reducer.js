@@ -34,11 +34,11 @@ export const toogleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const authMeTC = () => {
     return (dispatch) => {
         dispatch(toogleIsFetching(true))
-        authAPI.authMe().then(data => {
-                if (data.resultCode === 0)  {
-                    dispatch(setUserData(data))
-                }
-            })
+        return authAPI.authMe().then(data => {
+            if (data.resultCode === 0)  {
+                dispatch(setUserData(data))
+            }
+        })
     }
 }
 

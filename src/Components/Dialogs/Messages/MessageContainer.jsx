@@ -1,12 +1,12 @@
 import React from 'react';
-import sendMessage from '../../../redux/dialogs-reducer'
+// import sendMessage from '../../../redux/dialogs-reducer'
 // import MessageItem from './Message';
 import cls from './MessageContainer.module.scss';
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-// импортируем кастомную Texarea
+// импортируем кастомную Textarea
 import { Textarea } from '../../Common/FormControls/FormControls'
 // импорт валидаторов
 import { requared, maxLenghtCreater } from '../../../utils/validators/validator'

@@ -3,6 +3,7 @@ import { getUsersTC, toggleFollowingInProgress, toggleIsFetching, setTotalUsersC
 import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
+import * as usersel from './../../redux/users-selector'
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -23,12 +24,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.person,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching : state.usersPage.isFetching,
-        followingInProgress : state.usersPage.followingInProgress
+        users: usersel.getPersonSelector(state),
+        pageSize: usersel.getPageSizeSelector(state),
+        totalUsersCount: usersel.getTotalUsersCountSelector(state),
+        currentPage: usersel.getCurrentPageSelector(state),
+        isFetching : usersel.getIsFetchingSelector(state),
+        followingInProgress : usersel.getFollowingInProgressSelector(state)
     }
 }
 //  было

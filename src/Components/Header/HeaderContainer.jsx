@@ -1,14 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
-import { toogleIsFetching, setUserData, authMeTC, logoutTC } from './../../redux/auth-reducer'
+import { toogleIsFetching, setUserData, logoutTC } from './../../redux/auth-reducer'
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-        this.props.authMeTC()
-    }
+    // componentDidMount() {
+    //     this.props.authMeTC()
+    // }
     logoutMe = () => {this.props.logoutTC()}
-
     render() {
         return <>
             <Header {...this.props} logout = {this.logoutMe} />
@@ -25,6 +24,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { toogleIsFetching, 
                                             setUserData,
-                                            authMeTC,
+                                            // authMeTC,
                                             logoutTC
                                         })(HeaderContainer)
