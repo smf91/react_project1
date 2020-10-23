@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from './../../redux/profile-reducer'
+import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from '../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import PostsContainer from './Posts/PostsContainer'
 import { Field, reduxForm } from 'redux-form'
@@ -14,36 +14,38 @@ import { Textarea } from '../Common/FormControls/FormControls'
 import cls from './ProfileContainer.module.scss'
 
 
-const ProfileContainer = (props) => {
-    // let [status, setStatus] = useState(props.match.params.userId )
-    // let [status, setStatus] = useState(props.autorisedUserId)
-    // const activateEditMode = () => {
-    //     setEditMode(true)
+class ProfileContainer extends React.Component {
+
+
+
+    
+    // description local state and life cycle method for class component
+    // componentDidMount() {
+    //     let userId = null
+    //     if (!this.props.match.params.userId && !this.props.autorisedUserId) {
+    //         this.props.history.push('/login')
+    //     }
+    //     else {
+    //         userId = this.props.match.params.userId || this.props.autorisedUserId.id
+    //     }
+    //     this.props.getProfileTC(userId)
+    //     // делаем запрос за статусом пользователя
+    //     this.props.getStatusTC(userId)
+    //     // this.props.updateStatusTC()
     // }
-    useEffect(()=>{
-        let userId = null
-        if (!props.match.params.userId && !props.autorisedUserId) {
-            this.props.history.push('/login')
-        }
-        else {
-            userId = props.match.params.userId || props.autorisedUserId.id
-        }
-        props.getProfileTC(userId)
-        // делаем запрос за статусом пользователя
-        props.getStatusTC(userId)
-        // this.props.updateStatusTC()
-    })
-const sendPost = (values) => {
-        props.createPostAC(values.textNewPost)
+    sendPost = (values) => {
+        this.props.createPostAC(values.textNewPost)
     }
+    render() {
         return <>
-            <ProfileInfo profileInfo={props.profileInfo}
-                status={props.status}
-                updateStatus={props.updateStatusTC}
+            <ProfileInfo profileInfo={this.props.profileInfo}
+                status={this.props.status}
+                updateStatus={this.props.updateStatusTC}
             />
-            <AddPostFormRF onSubmit={sendPost} />
+            <AddPostFormRF onSubmit={this.sendPost} />
             <PostsContainer />
         </>
+    }
 }
 
 let maxLenght30 = maxLenghtCreater(30)
