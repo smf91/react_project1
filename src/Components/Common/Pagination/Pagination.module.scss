@@ -1,0 +1,11 @@
+.pageNumbers{
+    display: flex;
+    justify-content: center;
+    div{
+        margin: 2px 5px;
+    }
+    .selectedPage{
+        color: aquamarine;
+        font-weight: 600;
+    }
+}

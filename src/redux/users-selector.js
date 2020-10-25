@@ -3,8 +3,8 @@ import {createSelector} from 'reselect'
 export const getPersonSelector = (state) =>{
     return state.usersPage.person
 }
-//  cоздаем селектор сложный селектор с помощью reselect. В зависимостях можно указать несколько
-//  селекторов в том числе и не простых
+//  cоздаем селектор, сложный селектор создается с помощью reselect.
+//  В зависимостях можно указать несколько селекторов в том числе и не простых
 export const getPersonSelectorSuper = createSelector(getPersonSelector, (person)=>{
     return person.filter(u=> true)
 })

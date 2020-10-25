@@ -15,13 +15,13 @@ import Fething from './Components/Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import { Provider } from 'react-redux';
 
-const App = (props) => {
-  useEffect( () => { props.initializeApp() }, [props.initialized])
-  if (!props.initialized) return <Fething />
+const App = ({initializeApp, initialized, store}) => {
+  useEffect( () => {initializeApp() }, [initialized, initializeApp])
+  if (!initialized) return <Fething />
   else
     return (
       <BrowserRouter>
-        <Provider store={props.store}>
+        <Provider store={store}>
           <div className='wrapper'>
             <HeaderContainer />
             <Navigation />

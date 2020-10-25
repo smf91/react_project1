@@ -4,6 +4,7 @@ import { authAPI } from '../api/api'
 const SET_LOGIN_DATA = "SET_LOGIN_DATA"
 const SET_USER_DATA = "SET_USER_DATA"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+const UNSET_AUTHORISATION_DATA = "UNSET_AUTHORISATION_DATA"
 
 let initialState = {
     data: null,
@@ -21,11 +22,15 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state, isFetching: action.isFetching
             }
+        case UNSET_AUTHORISATION_DATA:
+            return {
+                ...state, data: null
+            }
         default:
             return state
     }
 }
-
+export const unsetAuthData = () => ({ type: UNSET_AUTHORISATION_DATA })
 export const setLoginData = (loginData) => ({ type: SET_LOGIN_DATA, loginData })
 export const setUserData = (data) => ({ type: SET_USER_DATA, data })
 export const toogleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
@@ -56,7 +61,7 @@ export const loginTC = (formData) => async (dispatch) => {
 export const logoutTC = () => async (dispatch) => {
     let data = await authAPI.logoutMe()
     if (data.resultCode === 0) {
-        dispatch(authMeTC(null))
+        dispatch(unsetAuthData())
     }
 }
 

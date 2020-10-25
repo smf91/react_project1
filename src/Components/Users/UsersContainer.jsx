@@ -5,16 +5,16 @@ import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import * as usersel from './../../redux/users-selector'
 
-const UsersContainer = React.memo((props) => {
+const UsersContainer = React.memo(({getUsersTC, currentPage, pageSize, isFetching, ...props}) => {
     useEffect( () => {
-        props.getUsersTC(props.currentPage, props.pageSize)
-    }, [props.currentPage])
+        getUsersTC(currentPage, pageSize)
+    }, [currentPage, pageSize, getUsersTC])
     const onPageChanged = (pageNumber) => {
-        props.onPageChangetTC(pageNumber, props.pageSize)
+        props.onPageChangetTC(pageNumber, pageSize)
     }
     return <>
-        {props.isFetching   ? <Fetching/> 
-                            :<Users {...props} onPageChanged={onPageChanged} />}
+        {isFetching   ? <Fetching/> 
+                        :<Users {...props} onPageChanged={onPageChanged} pageSize ={pageSize} />}
         </>
 })
 

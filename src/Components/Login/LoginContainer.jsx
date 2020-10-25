@@ -2,7 +2,6 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import cls from './LoginContainer.module.scss';
 import {loginTC} from '../../redux/auth-reducer'
-
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';

@@ -2,22 +2,16 @@ import React from 'react'
 import cls from './Users.module.scss';
 import usersicon from '../../assets/images/usericon.png'
 import { NavLink } from 'react-router-dom';
-// import {UserAPI} from '../../api/api'
+import { Pagination } from '../Common/Pagination/Pagination'
 
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+    for (let i = 1; i <= pagesCount; i++) { pages.push(i) }
     return (
         <div>
-            <div className={cls.pageNumbers}>
-                {pages.map(p => {
-                    return <div onClick={() => { props.onPageChanged(p) }} className={props.currentPage === p && cls.selectedPage} > {p}</div>
-                })}
-            </div>
+            <Pagination onPageChanged={props.onPageChanged} currentPage={props.currentPage} pages={pages} />
             {
                 props.users.map(u => <div className={cls.userBlockItem} key={u.id}>
                     <div className={cls.leftBlock}>
@@ -27,11 +21,11 @@ let Users = (props) => {
                             </NavLink>
                         </div>
                         <div className={cls.btn}>
-                            {u.followed 
-                                ?<button disabled = {props.followingInProgress.some(id => id ===u.id)} 
-                                        onClick={() => {props.unfollowTC(u.id)}}>Unfollow</button>
-                                :<button disabled = {props.followingInProgress.some(id => id === u.id)} 
-                                        onClick={() => {props.followTC(u.id)}}>Follow</button>
+                            {u.followed
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                    onClick={() => { props.unfollowTC(u.id) }}>Unfollow</button>
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                    onClick={() => { props.followTC(u.id) }}>Follow</button>
                             }
                         </div>
                     </div>

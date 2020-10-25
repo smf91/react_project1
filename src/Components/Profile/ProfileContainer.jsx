@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
@@ -14,27 +14,29 @@ import { Textarea } from '../Common/FormControls/FormControls'
 import cls from './ProfileContainer.module.scss'
 
 
-const ProfileContainer = (props) => {
+const ProfileContainer = ({autorisedUserId, match, history, getProfileTC, 
+                            getStatusTC, createPostAC,profileInfo, status, 
+                            updateStatusTC, ...props}) => {
     useEffect(()=>{
         let userId = null
-        if (!props.match.params.userId && !props.autorisedUserId) {
-            props.history.push('/login')
+        if (!autorisedUserId && !match.params.userId) {
+            history.push('/login')
         }
         else {
-            userId = props.match.params.userId || props.autorisedUserId.id
+            userId = match.params.userId || autorisedUserId.id
         }
-        props.getProfileTC(userId)
+        getProfileTC(userId)
         // делаем запрос за статусом пользователя
-        props.getStatusTC(userId)
+        getStatusTC(userId)
         // this.props.updateStatusTC()
-    },[props.match.params.userId, props.autorisedUserId])
+    },[match.params.userId, autorisedUserId, getProfileTC, getStatusTC, history])
 const sendPost = (values) => {
-        props.createPostAC(values.textNewPost)
+        createPostAC(values.textNewPost)
     }
         return <>
-            <ProfileInfo profileInfo={props.profileInfo}
-                status={props.status}
-                updateStatus={props.updateStatusTC}
+            <ProfileInfo profileInfo={profileInfo}
+                status={status}
+                updateStatus={updateStatusTC}
             />
             <AddPostFormRF onSubmit={sendPost} />
             <PostsContainer />
@@ -43,10 +45,10 @@ const sendPost = (values) => {
 
 let maxLenght30 = maxLenghtCreater(30)
 
-const AddPostForm = (props) => {
+const AddPostForm = ({handleSubmit}) => {
     return (
         <div className={cls.newPostBlock}>
-            <form onSubmit={props.handleSubmit} >
+            <form onSubmit={handleSubmit} >
                 <div>
                     <Field placeholder={"text message"}
                         // через name  получаем доступ к данным строки в обьекте AddPostFormRF
