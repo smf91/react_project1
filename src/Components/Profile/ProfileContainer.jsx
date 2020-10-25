@@ -15,15 +15,10 @@ import cls from './ProfileContainer.module.scss'
 
 
 const ProfileContainer = (props) => {
-    // let [status, setStatus] = useState(props.match.params.userId )
-    // let [status, setStatus] = useState(props.autorisedUserId)
-    // const activateEditMode = () => {
-    //     setEditMode(true)
-    // }
     useEffect(()=>{
         let userId = null
         if (!props.match.params.userId && !props.autorisedUserId) {
-            this.props.history.push('/login')
+            props.history.push('/login')
         }
         else {
             userId = props.match.params.userId || props.autorisedUserId.id
@@ -32,7 +27,7 @@ const ProfileContainer = (props) => {
         // делаем запрос за статусом пользователя
         props.getStatusTC(userId)
         // this.props.updateStatusTC()
-    })
+    },[props.match.params.userId, props.autorisedUserId])
 const sendPost = (values) => {
         props.createPostAC(values.textNewPost)
     }

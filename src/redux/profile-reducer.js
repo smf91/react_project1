@@ -51,32 +51,26 @@ export const setCurrentProfile = (currentProfileInfo) => ({ type: SET_CURRENT_PR
 export const createPostAC = (textNewPost) => ({ type: CREATE_POST, textNewPost })
 
 // Thunk creater
-export const getProfileTC = (userId) => (dispatch) => {
-        dispatch(toogleIsFetching(true))
-        profileAPI.getProfile(userId)
-            .then(data => {
-                dispatch(toogleIsFetching(false))
-                dispatch(setCurrentProfile(data))
-            })
-    }
-
-export const getStatusTC = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(data => {
-            dispatch(setUserStatus(data))
-        })
+export const getProfileTC = (userId) => async (dispatch) => {
+    dispatch(toogleIsFetching(true))
+    let data = await profileAPI.getProfile(userId)
+    dispatch(toogleIsFetching(false))
+    dispatch(setCurrentProfile(data))
 }
 
-export const updateStatusTC = (status) => (dispatch) => {
+export const getStatusTC = (userId) => async (dispatch) => {
+    let data = await profileAPI.getStatus(userId)
+    dispatch(setUserStatus(data))
+}
+
+export const updateStatusTC = (status) => async (dispatch) => {
     // получаем статус с формы и  апдейтим его на сервак
-    profileAPI.updateStatus(status)
-        .then(data => {
-            // после тогого как приходит подтверждение что все ок
-            if (data.resultCode === 0) {
-                // сетаем статус в наш глобальный стейт
-                dispatch(setUserStatus(status))
-            }
-        })
+    let data = await profileAPI.updateStatus(status)
+    // после тогого как приходит подтверждение что все ок
+    if (data.resultCode === 0) {
+        // сетаем статус в наш глобальный стейт
+        dispatch(setUserStatus(status))
+    }
 }
 
 export default profileReducer;

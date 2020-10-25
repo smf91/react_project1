@@ -6,7 +6,6 @@ let initialState = {
     initialized: false
 }
 
-
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
@@ -18,17 +17,16 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS })
-
-// Thunk creater
-export const initializeApp = () => (dispatch) => {
-    let promise = dispatch(authMeTC())
-    // dispatch(somesingTC())
-    // dispatch(somesingTC())
-    Promise.all([promise]).then(() => {
-        dispatch(initializedSuccess())
-    })
+export const initializeApp = () => {
+    return async (dispatch) => {
+        let promise = await dispatch(authMeTC())
+        //  используя promise all  мы можем дождаться выполнения нескольких промисов
+        Promise.all([promise]).then(() => {
+            dispatch(initializedSuccess())
+        })
+    }
 }
 
+export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS })
 
 export default appReducer;

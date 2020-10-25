@@ -1,26 +1,37 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { getUsersTC, toggleFollowingInProgress, toggleIsFetching, setTotalUsersCount, setCurrentPage, followTC, unfollowTC, setUsers, onPageChangetTC } from './../../redux/users-reducer'
 import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import * as usersel from './../../redux/users-selector'
 
-class UsersContainer extends React.Component {
-    componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+const UsersContainer = React.memo((props) => {
+    useEffect( () => {
+        props.getUsersTC(props.currentPage, props.pageSize)
+    }, [props.currentPage])
+    const onPageChanged = (pageNumber) => {
+        props.onPageChangetTC(pageNumber, props.pageSize)
     }
+    return <>
+        {props.isFetching   ? <Fetching/> 
+                            :<Users {...props} onPageChanged={onPageChanged} />}
+        </>
+})
 
-    onPageChanged = (pageNumber) => {
-        this.props.onPageChangetTC(pageNumber, this.props.pageSize)
-    }
-    render() {
-        return <>
-        {this.props.isFetching ? <Fetching/> 
-                                :<Users {...this.props} onPageChanged={this.onPageChanged} />}
-            </>
-    }
-
-}
+// class UsersContainer extends React.Component {
+//     componentDidMount() {
+//         this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+//     }
+//     onPageChanged = (pageNumber) => {
+//         this.props.onPageChangetTC(pageNumber, this.props.pageSize)
+//     }
+//     render() {
+//         return <>
+//         {this.props.isFetching ? <Fetching/> 
+//                                 :<Users {...this.props} onPageChanged={this.onPageChanged} />}
+//             </>
+//     }
+// }
 
 const mapStateToProps = (state) => {
     return {

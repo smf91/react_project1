@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 
 const ProfileStatus = (props) => {
     // используем хуки
@@ -16,6 +17,9 @@ const ProfileStatus = (props) => {
         setStatus(e.currentTarget.value)
         // props.updateStatus(status)
     }
+    useEffect(()=>{
+        setStatus(props.status)
+    }, [props.status])
 
     // description local state and life cycle method for class component
     // state = {
@@ -68,6 +72,5 @@ const ProfileStatus = (props) => {
         </>
     )
 }
-
 
 export default ProfileStatus
