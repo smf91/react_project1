@@ -3,6 +3,7 @@ import cls from './DialogItem.module.scss';
 import { NavLink } from 'react-router-dom';
 import {connect} from 'react-redux'
 import DialogItem from './DialogItem'
+import {compose} from 'redux'
 
 const mapStateToProps = (state) => {
     let dialogArr = state.person.person.filter(person => person.myprofile === false)
@@ -17,7 +18,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispathToProps = () =>{}
-const DialogItemContainer = connect (mapStateToProps, mapDispathToProps)(DialogItem)
-
-export default DialogItemContainer;
+export default compose (
+    connect (mapStateToProps, {})
+)
+(DialogItem)

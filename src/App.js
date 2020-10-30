@@ -9,11 +9,12 @@ import News from './Components/News/News';
 import Settings from './Components/Settings/Settings';
 import UsersContainer from './Components/Users/UsersContainer';
 import Login from './Components/Login/LoginContainer';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 import { initializeApp } from './redux/app-reducer'
 import Fething from './Components/Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import { Provider } from 'react-redux';
+import { compose } from 'redux';
 
 const App = ({initializeApp, initialized, store}) => {
   useEffect( () => {initializeApp() }, [initialized, initializeApp])
@@ -46,4 +47,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { initializeApp })(App)
+export default compose(
+  connect(mapStateToProps, { initializeApp })
+)(App)

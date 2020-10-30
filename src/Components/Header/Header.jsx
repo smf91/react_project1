@@ -4,7 +4,6 @@ import cls from './Header.module.scss';
 import logo from '../../assets/images/react_img.png'
 
 const Header =(props) =>{
-    // debugger
     return <header className={cls.header}>
         <div className={cls.blockLogo}>
             <img src={logo} alt="logo"/>

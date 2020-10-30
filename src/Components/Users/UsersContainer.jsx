@@ -4,6 +4,7 @@ import Users from './Users';
 import Fetching from './../Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import * as usersel from './../../redux/users-selector'
+import {compose} from 'redux'
 
 const UsersContainer = React.memo(({getUsersTC, currentPage, pageSize, isFetching, ...props}) => {
     useEffect( () => {
@@ -43,6 +44,8 @@ const mapStateToProps = (state) => {
         followingInProgress : usersel.getFollowingInProgressSelector(state)
     }
 }
+
+
 //  было
 // const mapDispathToProps = (dispatch) => {
 //     return {
@@ -55,13 +58,27 @@ const mapStateToProps = (state) => {
 //     }
 // }
 // стало
-export default connect(mapStateToProps,{    toggleFollowingInProgress, 
-                                            toggleIsFetching, 
-                                            setTotalUsersCount, 
-                                            setCurrentPage, 
-                                            followTC, 
-                                            unfollowTC, 
-                                            setUsers,
-                                            getUsersTC,
-                                            onPageChangetTC 
-                                        }) (UsersContainer)
+// export default connect(mapStateToProps,{    toggleFollowingInProgress, 
+//                                             toggleIsFetching, 
+//                                             setTotalUsersCount, 
+//                                             setCurrentPage, 
+//                                             followTC, 
+//                                             unfollowTC, 
+//                                             setUsers,
+//                                             getUsersTC,
+//                                             onPageChangetTC 
+//                                         }) (UsersContainer)
+// еще упростили используя compose
+export default compose (
+    connect(mapStateToProps,{    toggleFollowingInProgress, 
+                                    toggleIsFetching, 
+                                    setTotalUsersCount, 
+                                    setCurrentPage, 
+                                    followTC, 
+                                    unfollowTC, 
+                                    setUsers,
+                                    getUsersTC,
+                                    onPageChangetTC 
+    })
+)
+(UsersContainer)

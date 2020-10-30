@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {compose } from 'redux'
 import Header from './Header'
 import { toogleIsFetching, setUserData, logoutTC } from './../../redux/auth-reducer'
 
@@ -22,8 +23,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { toogleIsFetching, 
-                                            setUserData,
-                                            // authMeTC,
-                                            logoutTC
-                                        })(HeaderContainer)
+
+export default compose (
+    connect(mapStateToProps, { toogleIsFetching, 
+                                setUserData,
+                                // authMeTC,
+                                logoutTC
+    })
+)
+(HeaderContainer)
