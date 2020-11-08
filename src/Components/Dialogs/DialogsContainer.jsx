@@ -10,12 +10,8 @@ class DialogsContainer extends React.Component {
     render() {
         return (
             <div className={cls.dialogs}>
-                {/* <div className={cls.dialogBlock}> */}
                     <DialogItemContainer />
-                {/* </div> */}
-                {/* <div className={cls.messageBlock}> */}
                     <MessageContainer />
-                {/* </div> */}
             </div>
         )
     }
