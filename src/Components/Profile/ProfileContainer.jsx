@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
-import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC } from './../../redux/profile-reducer'
+import { updateStatusTC, getStatusTC, toogleIsFetching, setCurrentProfile, getProfileTC, createPostAC, savePhoto } from './../../redux/profile-reducer'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import PostsContainer from './Posts/PostsContainer'
 import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router-dom'
-// import withAuthRedirect from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'
 // импорт валидаторов
 import { requared, maxLenghtCreater } from '../../utils/validators/validator'
@@ -13,10 +12,9 @@ import { requared, maxLenghtCreater } from '../../utils/validators/validator'
 import { Textarea } from '../Common/FormControls/FormControls'
 import cls from './ProfileContainer.module.scss'
 
-
 const ProfileContainer = ({autorisedUserId, match, history, getProfileTC, 
                             getStatusTC, createPostAC,profileInfo, status, 
-                            updateStatusTC, ...props}) => {
+                            updateStatusTC, savePhoto, ...props}) => {
     useEffect(()=>{
         let userId = null
         if (!autorisedUserId && !match.params.userId) {
@@ -35,9 +33,10 @@ const sendPost = (values) => {
     }
         return <>
             <ProfileInfo profileInfo={profileInfo}
-                status={status}
-                updateStatus={updateStatusTC}
-            />
+                        isOwner = {!match.params.userId }
+                        status={status}
+                        updateStatus={updateStatusTC}
+                        savePhoto = {savePhoto}/>
             <AddPostFormRF onSubmit={sendPost} />
             <PostsContainer />
         </>
@@ -56,8 +55,7 @@ const AddPostForm = ({handleSubmit}) => {
                         //  говорим redux-form  какую форму отрисовать (в данном случае кастомная форма)
                         component={Textarea}
                         //  передаем нужные валидаторы для данного Field
-                        validate={[requared, maxLenght30]}
-                    />
+                        validate={[requared, maxLenght30]} />
                 </div>
                 <div>
                     <button>send</button>
@@ -88,7 +86,8 @@ export default compose(
         getStatusTC,
         toogleIsFetching,
         setCurrentProfile,
-        getProfileTC
+        getProfileTC,
+        savePhoto
     }),
     // withAuthRedirect,
     withRouter

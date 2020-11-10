@@ -4,15 +4,32 @@
     grid-template-rows: 1fr;
     grid-template-columns: 6fr 6fr;
     grid-gap: 0.5vw;
-    .avatar{
+    .avatar {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: blue;
+        // background-color: blue;
+        img {
+            height: 250px;
+            width: 250px;
+            border-radius: 50%;
+        }
+        // &:hover {
+        //     filter: brightness(60%);
+        //     &::before {
+        //         content: url("../../../assets/camera.svg");
+        //         position: absolute;
+        //         width: 100px;
+        //         height: 100px;
+        //         fill: white;
+        //         z-index: 3;
+        //     }
+        // }
     }
-    .description{
+    .description {
         display: flex;
         flex-direction: column;
-        background-color: red;
+        // background-color: red;
     }
 }

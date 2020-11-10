@@ -7,19 +7,18 @@ import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Music from './Components/Music/Music';
 import News from './Components/News/News';
 import Settings from './Components/Settings/Settings';
-// import UsersContainer from './Components/Users/UsersContainer';
 import Login from './Components/Login/LoginContainer';
-import { BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { initializeApp } from './redux/app-reducer'
 import Fething from './Components/Common/Fetching/Fetching'
 import { connect } from 'react-redux'
 import { Provider } from 'react-redux';
 import { compose } from 'redux';
-import {withSuspense} from './hoc/withSuspense'
-const UsersContainer = React.lazy(()=> import ('./Components/Users/UsersContainer'))
+import { withSuspense } from './hoc/withSuspense'
+const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'))
 
-const App = ({initializeApp, initialized, store}) => {
-  useEffect( () => {initializeApp() }, [initialized, initializeApp])
+const App = ({ initializeApp, initialized, store }) => {
+  useEffect(() => { initializeApp() }, [initialized, initializeApp])
   if (!initialized) return <Fething />
   else
     return (
@@ -38,7 +37,7 @@ const App = ({initializeApp, initialized, store}) => {
                           <UsersContainer />
                           </React.Suspense>
                       }} /> */}
-                      {/* или через HOC */}
+              {/* или через HOC */}
               <Route path='/users' render={withSuspense(UsersContainer)} />
               <Route path='/News' component={News} />
               <Route path='/login' component={Login} />

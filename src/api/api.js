@@ -48,11 +48,12 @@ export const authAPI = {
             })
     },
     loginMe(formData) {
-        return instans.post(`auth/login`, { email : formData.email, 
-                                            password : formData.password, 
-                                            rememberMe:formData.rememberMe,
-                                            // captcha: data.captcha
-                                        })
+        return instans.post(`auth/login`, {
+            email: formData.email,
+            password: formData.password,
+            rememberMe: formData.rememberMe,
+            // captcha: data.captcha
+        })
             .then(response => {
                 return response.data
             })
@@ -95,7 +96,19 @@ export const profileAPI = {
     },
     updateStatus(status) {
         // в качестве второго параметра мы передаем обьект у которого есть свойство status
-        return instans.put(`profile/status`, {status : status} )
+        return instans.put(`profile/status`, { status: status })
+            .then(response => {
+                return response.data
+            })
+    },
+    savePhoto(file) {
+        const formData = new FormData()
+        formData.append("image", file)
+        return instans.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then(response => {
                 return response.data
             })
