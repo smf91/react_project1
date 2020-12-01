@@ -2,7 +2,7 @@ import React from 'react'
 import cls from './Fetching.module.scss';
 import preloader from '../../../assets/images/preloader.gif'
 
-let Fething = (props) => {
+let Fetching = (props) => {
     return (
         <div className={cls.wrapper}>
             <div className={cls.preloader}>
@@ -12,4 +12,4 @@ let Fething = (props) => {
     )
 }
 
-export default Fething
+export default Fetching

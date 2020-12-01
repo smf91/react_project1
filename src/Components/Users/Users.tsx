@@ -2,16 +2,25 @@ import React from 'react'
 import cls from './Users.module.scss';
 import usersicon from '../../assets/images/usericon.png'
 import { NavLink } from 'react-router-dom';
-import { Pagination } from '../Common/Pagination/Pagination'
+import Pagination from '../Common/Pagination/Pagination'
+import { PersonType } from '../../types/types'
 
+export type PropsType = {
+    totalItemsCount: number,
+    pageSize: number,
+    currentPage: number,
+    users: Array<any>
+    followingInProgress: Array<number>
+    onPageChanged: (pageNumber: number) => void,
+    unfollowTC: (UserId: number) => void
+    followTC: (UserId: number) => void
+}
 
-let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) { pages.push(i) }
+let Users: React.FC<PropsType> = (props) => {
     return (
         <div>
-            <Pagination onPageChanged={props.onPageChanged} currentPage={props.currentPage} pages={pages} />
+            <Pagination onPageChanged={props.onPageChanged} currentPage={props.currentPage}
+                pageSize={props.pageSize} totalItemsCount={props.totalItemsCount} />
             {
                 props.users.map(u => <div className={cls.userBlockItem} key={u.id}>
                     <div className={cls.leftBlock}>

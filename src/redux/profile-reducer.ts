@@ -1,22 +1,30 @@
 import { profileAPI } from '../api/api'
+import { CurrentProfileType, PostsDataType, ContactsType, PhotosType } from '../types/types'
+const CREATE_POST: string = "CREATE-POST"
+const SET_CURRENT_PROFILE: string = "SET_CURRENT_PROFILE"
+const TOGGLE_IS_FETCHING: string = "TOGGLE_IS_FETCHING"
+const SET_USER_STATUS: string = "SET_USER_STATUS"
+const SAVE_PHOTO_SUCCES: string = "SAVE_PHOTO_SUCCES"
 
-const CREATE_POST = "CREATE-POST"
-const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE"
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
-const SET_USER_STATUS = "SET_USER_STATUS"
-const SAVE_PHOTO_SUCCES = "SAVE_PHOTO_SUCCES"
 
-let initialState = {
+export type InitialStateType = {
+    isFetching: boolean,
+    currentProfile: CurrentProfileType | null,
+    status: string
+    postsData: Array<PostsDataType>
+}
+
+let initialState: InitialStateType = {
     isFetching: false,
     currentProfile: null,
     status: "",
     postsData: [
         { id: 1, message: "first text posts", likesCount: 12 },
         { id: 2, message: "second text posts", likesCount: 23 }
-    ],
+    ]
 }
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case CREATE_POST: {
             let newPost = {
@@ -43,33 +51,57 @@ const profileReducer = (state = initialState, action) => {
             }
         case SAVE_PHOTO_SUCCES:
             return {
-                ...state, 
+                ...state,
                 // currentProfile: { ...currentProfile, photos: action.photos }
             }
         default:
             return state
     }
 }
-export const savePhotoSucces = (photos) => ({ type: SAVE_PHOTO_SUCCES, photos })
-export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
-export const toogleIsFetching = (IsFetching) => ({ type: TOGGLE_IS_FETCHING, IsFetching })
-export const setCurrentProfile = (currentProfileInfo) => ({ type: SET_CURRENT_PROFILE, currentProfileInfo })
-export const createPostAC = (textNewPost) => ({ type: CREATE_POST, textNewPost })
+type SavePhotoSuccesActionType = {
+    type: typeof SAVE_PHOTO_SUCCES,
+    photos: string
+}
+export const savePhotoSucces = (photos: string): SavePhotoSuccesActionType => ({ type: SAVE_PHOTO_SUCCES, photos })
+
+type SetUserStatusActionType = {
+    type: typeof SET_USER_STATUS,
+    status: string
+}
+export const setUserStatus = (status: string): SetUserStatusActionType => ({ type: SET_USER_STATUS, status })
+
+type ToogleIsFetchingActionType = {
+    type: typeof TOGGLE_IS_FETCHING,
+    IsFetching: boolean
+}
+export const toogleIsFetching = (IsFetching: boolean): ToogleIsFetchingActionType => ({ type: TOGGLE_IS_FETCHING, IsFetching })
+
+type SetCurrentProfileActionType = {
+    type: typeof SET_CURRENT_PROFILE,
+    currentProfileInfo: Object
+}
+export const setCurrentProfile = (currentProfileInfo: any): SetCurrentProfileActionType => ({ type: SET_CURRENT_PROFILE, currentProfileInfo })
+
+type CreatePostAcActionType = {
+    type: typeof CREATE_POST,
+    textNewPost: string
+}
+export const createPostAC = (textNewPost: string): CreatePostAcActionType => ({ type: CREATE_POST, textNewPost })
 
 // Thunk creater
-export const getProfileTC = (userId) => async (dispatch) => {
+export const getProfileTC = (userId: number) => async (dispatch: any) => {
     dispatch(toogleIsFetching(true))
     let data = await profileAPI.getProfile(userId)
     dispatch(toogleIsFetching(false))
     dispatch(setCurrentProfile(data))
 }
 
-export const getStatusTC = (userId) => async (dispatch) => {
+export const getStatusTC = (userId: number) => async (dispatch: any) => {
     let data = await profileAPI.getStatus(userId)
     dispatch(setUserStatus(data))
 }
 
-export const updateStatusTC = (status) => async (dispatch) => {
+export const updateStatusTC = (status: string) => async (dispatch: any) => {
     // получаем статус с формы и  апдейтим его на сервак
     let data = await profileAPI.updateStatus(status)
     // после тогого как приходит подтверждение что все ок
@@ -79,7 +111,7 @@ export const updateStatusTC = (status) => async (dispatch) => {
     }
 }
 
-export const savePhoto = (file) => async (dispatch) => {
+export const savePhoto = (file: any) => async (dispatch: any) => {
     let data = await profileAPI.savePhoto(file)
     if (data.resultCode === 0) {
         dispatch(savePhotoSucces(data.photos))
