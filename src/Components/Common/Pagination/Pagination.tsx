@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { setSyntheticLeadingComments } from 'typescript'
 import cls from './Pagination.module.scss'
 import cn from 'classnames'
 
@@ -13,8 +12,8 @@ type PropsType = {
 
 let Pagination: React.FC<PropsType> = ({ totalItemsCount,
     pageSize,
-    onPageChanged,
     currentPage,
+    onPageChanged,
     portionSize = 10 }) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize)

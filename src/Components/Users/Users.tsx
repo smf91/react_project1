@@ -9,11 +9,11 @@ export type PropsType = {
     totalItemsCount: number,
     pageSize: number,
     currentPage: number,
-    users: Array<any>
+    users: Array<any> //------PersonType ?
     followingInProgress: Array<number>
-    onPageChanged: (pageNumber: number) => void,
     unfollowTC: (UserId: number) => void
     followTC: (UserId: number) => void
+    onPageChanged: (pageNumber: number) => void,
 }
 
 let Users: React.FC<PropsType> = (props) => {
